@@ -16,20 +16,47 @@ const SOURCE_LABEL: Record<string, string> = {
   ctftime: 'CTFtime', mlh: 'MLH', devfolio: 'Devfolio', unstop: 'Unstop',
   indiehackers: 'IndieHackers', linkedin: 'LinkedIn',
   'google-developers': 'Google Dev', 'aws-opensource': 'AWS OSS',
-  'eu-grants': 'EU Grants',
+  'eu-grants': 'EU Grants', 'hn-jobs': 'HN Jobs', internshala: 'Internshala',
+  wellfound: 'Wellfound', hackerearth: 'HackerEarth', kaggle: 'Kaggle',
+  ethglobal: 'ETHGlobal',
 }
 
 function getKind(opp: Opp): Kind {
   const src = opp.source
-  if (['devpost', 'mlh', 'devfolio', 'unstop', 'ctftime'].includes(src)) return 'events'
-  if (['remotive', 'weworkremotely'].includes(src)) return 'jobs'
+  if (['devpost', 'mlh', 'devfolio', 'unstop', 'ctftime', 'hackerearth', 'kaggle', 'ethglobal'].includes(src)) return 'events'
+  if (['remotive', 'weworkremotely', 'hn-jobs', 'internshala', 'wellfound'].includes(src)) return 'jobs'
   if (['devto', 'indiehackers', 'google-developers', 'aws-opensource', 'eu-grants'].includes(src)) return 'blogs'
   if (src === 'github') return 'repos'
-  // Infer from tags + title
   const text = [opp.title, ...(opp.tags ?? [])].join(' ').toLowerCase()
-  if (['hackathon', 'contest', 'bounty', 'fellowship', 'grant', 'competition', 'internship', 'program'].some(k => text.includes(k))) return 'events'
-  if (['hiring', 'job', 'career', 'remote work', 'salary'].some(k => text.includes(k))) return 'jobs'
+  if (['hackathon', 'contest', 'bounty', 'fellowship', 'grant', 'competition', 'kaggle', 'ctf'].some(k => text.includes(k))) return 'events'
+  if (['internship', 'intern', 'hiring', 'job', 'career', 'salary', 'remote work', 'startup'].some(k => text.includes(k))) return 'jobs'
   return 'events'
+}
+
+// ─── Radar background ─────────────────────────────────────────────────────────
+const BLIPS = [
+  { top: '38%', left: '62%', delay: '0.8s' },
+  { top: '55%', left: '35%', delay: '2.1s' },
+  { top: '30%', left: '45%', delay: '3.4s' },
+  { top: '65%', left: '58%', delay: '1.2s' },
+  { top: '44%', left: '72%', delay: '2.9s' },
+]
+
+function RadarBackground() {
+  return (
+    <div className="radar-bg" aria-hidden="true">
+      {[140, 210, 280, 350].map(r => (
+        <div key={r} className="radar-circle" style={{ width: r, height: r }} />
+      ))}
+      {/* Crosshairs */}
+      <div style={{ position: 'absolute', top: '50%', left: '10%', right: '10%', height: '1px', background: 'var(--ink)', transform: 'translateY(-50%)' }} />
+      <div style={{ position: 'absolute', left: '50%', top: '10%', bottom: '10%', width: '1px', background: 'var(--ink)', transform: 'translateX(-50%)' }} />
+      <div className="radar-sweep" />
+      {BLIPS.map((b, i) => (
+        <div key={i} className="radar-blip" style={{ top: b.top, left: b.left, animationDelay: b.delay }} />
+      ))}
+    </div>
+  )
 }
 
 // ─── Tutorial steps ───────────────────────────────────────────────────────────
@@ -202,7 +229,8 @@ export default function Home() {
   const filtered = activeTab === 'all' ? opps : categorized[activeTab]
 
   return (
-    <main style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--ink)' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--ink)', position: 'relative' }}>
+      <RadarBackground />
 
       {/* ── Nav ── */}
       <nav className="nav">
@@ -218,7 +246,7 @@ export default function Home() {
       </nav>
 
       {/* ── Hero ── */}
-      <section style={{ maxWidth: '700px', margin: '0 auto', padding: '5rem 1.5rem 3rem', textAlign: 'center', animation: 'sketch-in 0.4s ease-out' }}>
+      <section style={{ maxWidth: '700px', margin: '0 auto', padding: '5rem 1.5rem 3rem', textAlign: 'center', animation: 'sketch-in 0.4s ease-out', position: 'relative', zIndex: 1 }}>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '3px', marginBottom: '1rem' }}>
           ✏ Opportunity radar
         </p>
