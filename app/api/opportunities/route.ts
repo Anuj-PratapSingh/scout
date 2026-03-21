@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase'
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const source = searchParams.get('source')
-  const limit = Math.min(Number(searchParams.get('limit') ?? '24'), 100)
+  const limit = Math.min(Number(searchParams.get('limit') ?? '24'), 1000)
 
   const db = getSupabaseAdmin()
   let query = db

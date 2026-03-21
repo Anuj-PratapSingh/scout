@@ -490,7 +490,7 @@ export default function Home() {
   const [showTutorial, setShowTutorial] = useState(false)
 
   useEffect(() => {
-    fetch('/api/opportunities?limit=120')
+    fetch('/api/opportunities?limit=800')
       .then(r => r.json())
       .then(d => { setOpps(d.opportunities ?? []); setLoading(false) })
       .catch(() => setLoading(false))
