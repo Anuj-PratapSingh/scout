@@ -7,7 +7,6 @@ const STEPS = [
     items: [
       { label: '📧 Email', desc: 'Already set if you signed up with email. Scout sends a daily digest — or instant alerts for perfect matches.' },
       { label: '✈️ Telegram', desc: 'Search @scout_theautomation_bot on Telegram → press Start → follow the 3-question setup. Takes 60 seconds.' },
-      { label: '🎮 Discord', desc: 'Invite the Scout bot to your server, then run /scout-subscribe. Scout will DM you directly.' },
     ],
   },
   {

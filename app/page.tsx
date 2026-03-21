@@ -119,7 +119,7 @@ const TUTORIAL = [
   { icon: '📡', title: 'Scout monitors 20+ sources', body: 'HackerNews, Reddit, Devpost, MLH, GitHub, CTFtime, Devfolio, Remotive and more — scraped 3× daily.' },
   { icon: '🎯', title: 'You set your criteria', body: 'Pick categories (hackathons, jobs, bounties…), add keywords, set a match threshold, and flag compulsory criteria.' },
   { icon: '📬', title: 'Digest or instant alert', body: 'Good matches → one digest email. Perfect matches (hits ALL criteria) → standalone alert sent immediately.' },
-  { icon: '✈️', title: 'Telegram & Discord too', body: 'Set up via @scout_theautomation_bot on Telegram or the Scout bot on Discord. Matches arrive in seconds.' },
+  { icon: '✈️', title: 'Works on Telegram too', body: 'Set up @scout_theautomation_bot on Telegram in 60 seconds. After setup, Scout sends matching opps right away.' },
 ]
 
 // ─── Tutorial modal ───────────────────────────────────────────────────────────

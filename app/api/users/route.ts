@@ -3,15 +3,15 @@ import { supabaseAdmin } from '@/lib/supabase'
 
 // POST /api/users — create user at signup
 export async function POST(req: Request) {
-  const { email, telegram_id, discord_id } = await req.json()
+  const { email, telegram_id } = await req.json()
 
-  if (!email && !telegram_id && !discord_id) {
+  if (!email && !telegram_id) {
     return NextResponse.json({ error: 'At least one contact method required' }, { status: 400 })
   }
 
   const { data, error } = await supabaseAdmin
     .from('users')
-    .upsert({ email, telegram_id, discord_id }, { onConflict: 'email' })
+    .upsert({ email, telegram_id }, { onConflict: 'email' })
     .select()
     .single()
 

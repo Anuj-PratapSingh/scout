@@ -4,7 +4,6 @@ import { getSupabaseAdmin } from '@/lib/supabase'
 import { score, shouldNotify } from '@/lib/matcher'
 import { sendEmailNotification, sendDigestEmail } from '@/lib/notify/email'
 import { sendTelegramNotification } from '@/lib/notify/telegram'
-import { sendDiscordNotification } from '@/lib/notify/discord'
 import { decryptKey } from '@/lib/crypto'
 import type { Opportunity, Preferences } from '@/lib/types'
 
@@ -58,7 +57,7 @@ export async function POST(req: Request) {
 
     const { data: users } = await db
       .from('users')
-      .select('id, email, telegram_id, discord_id, preferences(*), user_keys(*)')
+      .select('id, email, telegram_id, preferences(*), user_keys(*)')
       .eq('is_active', true)
 
     if (!users?.length) return NextResponse.json({ ok: true, inserted, notified: 0 })
@@ -76,7 +75,6 @@ export async function POST(req: Request) {
       const perfectEmail: Array<{ opp: Opportunity; matched: string[] }> = []
       const digestEmail: Array<{ opp: Opportunity; matched: string[] }> = []
       const telegramMatches: Array<{ opp: Opportunity; matched: string[] }> = []
-      const discordMatches: Array<{ opp: Opportunity; matched: string[] }> = []
       const newOpps: Opportunity[] = []
 
       for (const opp of opps as Opportunity[]) {
@@ -101,7 +99,6 @@ export async function POST(req: Request) {
             : digestEmail.push({ opp, matched: result.matched })
         }
         if (user.telegram_id) telegramMatches.push({ opp, matched: result.matched })
-        if (user.discord_id) discordMatches.push({ opp, matched: result.matched })
       }
 
       if (!newOpps.length) continue
@@ -111,7 +108,6 @@ export async function POST(req: Request) {
         const channels: string[] = []
         if (user.email) channels.push('email')
         if (user.telegram_id) channels.push('telegram')
-        if (user.discord_id) channels.push('discord')
         return channels.map(channel => ({ user_id: user.id, opportunity_id: opp.id, channel }))
       })
       await db.from('notification_log').insert(logRows)
@@ -140,15 +136,6 @@ export async function POST(req: Request) {
         }
       }
 
-      // Discord: one message per opp
-      for (const { opp, matched } of discordMatches) {
-        try {
-          await sendDiscordNotification(user.discord_id!, opp, matched)
-          notified++
-        } catch (err) {
-          console.error(`[cron] discord to ${user.id} failed:`, err)
-        }
-      }
     }
 
     return NextResponse.json({ ok: true, inserted, notified })
