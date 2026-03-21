@@ -10,16 +10,8 @@ const RSS_FEEDS = [
   { url: 'https://remotive.com/remote-jobs/feed/', source: 'remotive' },
   { url: 'https://weworkremotely.com/remote-programming-jobs.rss', source: 'weworkremotely' },
   { url: 'https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss', source: 'weworkremotely' },
-  // Dev.to tags
-  { url: 'https://dev.to/feed/tag/hacktoberfest', source: 'devto' },
-  { url: 'https://dev.to/feed/tag/opensource', source: 'devto' },
-  { url: 'https://dev.to/feed/tag/hiring', source: 'devto' },
-  { url: 'https://dev.to/feed/tag/career', source: 'devto' },
-  { url: 'https://dev.to/feed/tag/showdev', source: 'devto' },
-  // GitHub blog (bounties, programs, grants)
+  // GitHub blog (announcements, open source, grants)
   { url: 'https://github.blog/feed/', source: 'github-blog' },
-  // Hacker News top stories (articles/discussions, not job board)
-  { url: 'https://news.ycombinator.com/rss', source: 'hackernews' },
   // IndieHackers
   { url: 'https://www.indiehackers.com/feed.xml', source: 'indiehackers' },
   // EU startup & grant news

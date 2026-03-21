@@ -217,6 +217,21 @@ function OppCard({ opp, onClick, index }: { opp: Opp; onClick: () => void; index
   )
 }
 
+// ─── Sub-filter chips for repos and blogs ─────────────────────────────────────
+const REPO_CHIPS = [
+  { key: 'all', label: 'All' },
+  { key: 'trending', label: '🔥 Trending (AI/ML)' },
+  { key: 'beginner-friendly', label: '🌱 Beginner' },
+  { key: 'project-guide', label: '📚 Guides' },
+  { key: 'cool-project', label: '✨ Cool' },
+]
+const BLOG_CHIPS = [
+  { key: 'all', label: 'All' },
+  { key: 'trending', label: '🔥 Trending' },
+  { key: 'legendary', label: '🌟 Legendary' },
+  { key: 'beginner-friendly', label: '🌱 Beginner-friendly' },
+]
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 const TABS: { key: Kind | 'all'; label: string; icon: string }[] = [
   { key: 'all', label: 'All', icon: '🔭' },
@@ -232,6 +247,8 @@ export default function Home() {
   const [selected, setSelected] = useState<Opp | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<Kind | 'all'>('all')
+  const [repoChip, setRepoChip] = useState('all')
+  const [blogChip, setBlogChip] = useState('all')
   const [showTutorial, setShowTutorial] = useState(false)
 
   useEffect(() => {
@@ -248,7 +265,17 @@ export default function Home() {
     repos: opps.filter(o => getKind(o) === 'repos'),
     swag: opps.filter(o => getKind(o) === 'swag'),
   }
-  const filtered = activeTab === 'all' ? opps : categorized[activeTab]
+
+  const baseFiltered = activeTab === 'all' ? opps : categorized[activeTab as Kind]
+
+  // Apply sub-chip filter for repos and blogs
+  const filtered = (() => {
+    if (activeTab === 'repos' && repoChip !== 'all')
+      return baseFiltered.filter(o => (o.tags ?? []).includes(repoChip))
+    if (activeTab === 'blogs' && blogChip !== 'all')
+      return baseFiltered.filter(o => (o.tags ?? []).includes(blogChip))
+    return baseFiltered
+  })()
 
   return (
     <main style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--ink)', position: 'relative' }}>
@@ -314,7 +341,7 @@ export default function Home() {
             const count = tab.key === 'all' ? opps.length : categorized[tab.key as Kind].length
             const active = activeTab === tab.key
             return (
-              <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+              <button key={tab.key} onClick={() => { setActiveTab(tab.key); setRepoChip('all'); setBlogChip('all') }}
                 style={{
                   fontFamily: 'var(--font-head)', fontSize: '0.85rem', padding: '0.6rem 1.1rem',
                   border: 'none', borderBottom: active ? '3px solid var(--ink)' : '3px solid transparent',
@@ -329,6 +356,42 @@ export default function Home() {
             )
           })}
         </div>
+
+        {/* Sub-filter chips for repos */}
+        {activeTab === 'repos' && !loading && (
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            {REPO_CHIPS.map(chip => (
+              <button key={chip.key} onClick={() => setRepoChip(chip.key)}
+                style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.72rem', padding: '4px 12px',
+                  border: '1px solid var(--ink)', borderRadius: '2px', cursor: 'pointer',
+                  background: repoChip === chip.key ? 'var(--ink)' : 'var(--bg)',
+                  color: repoChip === chip.key ? 'var(--bg)' : 'var(--ink)',
+                  transition: 'all 0.1s',
+                }}>
+                {chip.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Sub-filter chips for blogs */}
+        {activeTab === 'blogs' && !loading && (
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            {BLOG_CHIPS.map(chip => (
+              <button key={chip.key} onClick={() => setBlogChip(chip.key)}
+                style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.72rem', padding: '4px 12px',
+                  border: '1px solid var(--ink)', borderRadius: '2px', cursor: 'pointer',
+                  background: blogChip === chip.key ? 'var(--ink)' : 'var(--bg)',
+                  color: blogChip === chip.key ? 'var(--bg)' : 'var(--ink)',
+                  transition: 'all 0.1s',
+                }}>
+                {chip.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         {loading ? (
           <div style={{ textAlign: 'center', padding: '5rem', fontFamily: 'var(--font-head)', color: 'var(--ink-faint)' }}>

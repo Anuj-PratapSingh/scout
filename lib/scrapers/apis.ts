@@ -60,30 +60,52 @@ export async function scrapeMLH(): Promise<Opportunity[]> {
   }
 }
 
-// GitHub search — quality CS repos useful for students
-// Quality criteria: ≥50 stars, has description, not archived, CS/algo/interview topics
+// GitHub search — quality CS repos for students & hackers
+// 4 sub-categories stored as first tag:
+//   trending        — AI/LLM/Claude/hackathon-starter, recently active
+//   cool-project    — system-design, awesome-lists, novel CS repos
+//   beginner-friendly — good-first-issue, learn-to-code, intro algorithms
+//   project-guide   — roadmaps, project-based-learning, interview-prep
 export async function scrapeGitHub(): Promise<Opportunity[]> {
-  const queries = [
-    'topic:computer-science stars:>100',
-    'topic:algorithms stars:>100',
-    'topic:interview-prep stars:>50',
-    'topic:awesome topic:programming stars:>500',
-    'topic:data-structures stars:>100',
-    'topic:competitive-programming stars:>50',
+  const buckets: Array<{ q: string; category: string; minStars: number }> = [
+    // ── Trending: AI / LLM / Claude / hackathon tools ─────────────────────────
+    { q: 'topic:llm stars:>200 pushed:>2024-01-01', category: 'trending', minStars: 200 },
+    { q: 'topic:ai-tools stars:>200 pushed:>2024-01-01', category: 'trending', minStars: 200 },
+    { q: 'anthropic OR claude-api stars:>50 pushed:>2024-06-01', category: 'trending', minStars: 50 },
+    { q: 'topic:langchain stars:>500', category: 'trending', minStars: 500 },
+    { q: 'hackathon starter template boilerplate stars:>100', category: 'trending', minStars: 100 },
+    { q: 'topic:mcp-server stars:>30 pushed:>2025-01-01', category: 'trending', minStars: 30 },
+    // ── Cool projects: system-design, awesome-lists, novel CS repos ────────────
+    { q: 'topic:system-design stars:>1000', category: 'cool-project', minStars: 1000 },
+    { q: 'topic:awesome topic:programming stars:>2000', category: 'cool-project', minStars: 2000 },
+    { q: 'topic:computer-science stars:>500', category: 'cool-project', minStars: 500 },
+    // ── Beginner-friendly: good-first-issue, learn-to-code, intro algos ────────
+    { q: 'topic:beginner-friendly stars:>100', category: 'beginner-friendly', minStars: 100 },
+    { q: 'topic:good-first-issue stars:>50', category: 'beginner-friendly', minStars: 50 },
+    { q: 'topic:algorithms stars:>200', category: 'beginner-friendly', minStars: 200 },
+    { q: 'topic:data-structures stars:>100', category: 'beginner-friendly', minStars: 100 },
+    { q: 'topic:learn-programming stars:>100', category: 'beginner-friendly', minStars: 100 },
+    // ── Project guides: roadmaps, project-based learning, interview prep ───────
+    { q: 'topic:roadmap stars:>1000', category: 'project-guide', minStars: 1000 },
+    { q: 'topic:project-based-learning stars:>200', category: 'project-guide', minStars: 200 },
+    { q: 'topic:interview-prep stars:>300', category: 'project-guide', minStars: 300 },
+    { q: 'build-your-own-x stars:>10000', category: 'project-guide', minStars: 10000 },
+    { q: 'topic:competitive-programming stars:>100', category: 'project-guide', minStars: 100 },
   ]
+
   const results: Opportunity[] = []
   const seen = new Set<string>()
 
-  for (const q of queries) {
+  await Promise.all(buckets.map(async ({ q, category, minStars }) => {
     try {
       const res = await fetch(
-        `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=10`,
+        `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=8`,
         {
           headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/vnd.github+json' },
-          signal: AbortSignal.timeout(8000),
+          signal: AbortSignal.timeout(10000),
         }
       )
-      if (!res.ok) continue
+      if (!res.ok) return
       const data = await res.json()
       const items: Array<{
         full_name: string; description: string | null; html_url: string
@@ -91,9 +113,8 @@ export async function scrapeGitHub(): Promise<Opportunity[]> {
       }> = data.items ?? []
 
       for (const repo of items) {
-        // Quality gates: must have description, ≥50 stars, not archived, not a fork
         if (!repo.description || repo.description.trim().length < 20) continue
-        if (repo.stargazers_count < 50) continue
+        if (repo.stargazers_count < minStars) continue
         if (repo.archived) continue
         if (repo.fork) continue
         if (seen.has(repo.html_url)) continue
@@ -104,13 +125,12 @@ export async function scrapeGitHub(): Promise<Opportunity[]> {
           description: `⭐ ${repo.stargazers_count.toLocaleString()} stars — ${repo.description.slice(0, 400)}`,
           url: repo.html_url,
           source: 'github',
-          tags: repo.topics ?? [],
+          // category tag first so UI chip filtering works, then repo's own topics
+          tags: [category, ...(repo.topics ?? [])],
         })
       }
-    } catch {
-      // continue
-    }
-  }
+    } catch { /* skip */ }
+  }))
 
   return results
 }
