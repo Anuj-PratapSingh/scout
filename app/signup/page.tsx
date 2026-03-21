@@ -15,7 +15,7 @@ export default function SignupPage() {
 
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/api/auth/callback` },
+      options: { emailRedirectTo: `${window.location.origin}/api/auth/callback?next=/onboarding` },
     })
 
     setLoading(false)

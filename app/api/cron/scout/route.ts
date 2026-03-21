@@ -17,6 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  try {
   const supabaseAdmin = getSupabaseAdmin()
 
   // --- Step 1: Scrape ---
@@ -36,11 +37,21 @@ export async function POST(req: Request) {
 
   const inserted = await runAllScrapers(scraperOpts)
 
-  // --- Step 2: Match & Notify ---
+  // --- Cleanup: delete expired opps older than 7 days ---
+  const cutoff7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+  await supabaseAdmin
+    .from('opportunities')
+    .delete()
+    .lt('fetched_at', cutoff7d)
+    .lt('deadline', new Date().toISOString())
+
+  // --- Step 2: Match & Notify (only opps from last 25h) ---
+  const since = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
   const { data: opps } = await supabaseAdmin
     .from('opportunities')
     .select('*')
     .eq('is_flagged', false)
+    .gte('fetched_at', since)
     .or('deadline.is.null,deadline.gt.' + new Date().toISOString())
     .order('fetched_at', { ascending: false })
     .limit(500)
@@ -85,8 +96,7 @@ export async function POST(req: Request) {
 
         try {
           if (channel === 'email') {
-            const key = userKey?.resend_api_key ? decryptKey(userKey.resend_api_key) : undefined
-            await sendEmailNotification(user.email!, opp, result.matched, key)
+            await sendEmailNotification(user.email!, opp, result.matched, undefined, user.id)
           } else if (channel === 'telegram') {
             await sendTelegramNotification(user.telegram_id!, opp, result.matched)
           } else if (channel === 'discord') {
@@ -105,4 +115,27 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ ok: true, inserted, notified })
+  } catch (err) {
+    console.error('[cron/scout]', err)
+    await alertAdmin(err)
+    return NextResponse.json({ error: String(err) }, { status: 500 })
+  }
+}
+
+async function alertAdmin(err: unknown) {
+  try {
+    const nodemailer = await import('nodemailer')
+    const transporter = nodemailer.default.createTransport({
+      service: 'gmail',
+      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+    })
+    await transporter.sendMail({
+      from: `Scout <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER,
+      subject: '[Scout] Cron job failed',
+      text: `The Scout cron job failed at ${new Date().toISOString()}:\n\n${String(err)}`,
+    })
+  } catch {
+    console.error('[cron] Failed to send admin alert')
+  }
 }

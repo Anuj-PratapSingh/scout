@@ -25,5 +25,8 @@ export async function GET(req: Request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(`${origin}/preferences`)
+  // Check if user has preferences set; if not, send to onboarding
+  const url = new URL(req.url)
+  const next = url.searchParams.get('next') ?? '/onboarding'
+  return NextResponse.redirect(`${origin}${next}`)
 }

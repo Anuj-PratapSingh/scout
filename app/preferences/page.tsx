@@ -163,7 +163,6 @@ export default function PreferencesPage() {
               { field: 'reddit_client_secret', label: 'Reddit Client Secret', placeholder: '••••••••a1b2', hint: '' },
               { field: 'google_cse_key', label: 'Google CSE API Key', placeholder: '••••••••a1b2', hint: 'console.cloud.google.com' },
               { field: 'google_cse_id', label: 'Google CSE ID', placeholder: '••••••••a1b2', hint: 'cse.google.com' },
-              { field: 'resend_api_key', label: 'Resend API Key', placeholder: '••••••••a1b2', hint: 'resend.com/api-keys' },
             ].map(({ field, label, placeholder, hint }) => (
               <div key={field}>
                 <label className="text-xs text-white/50 block mb-1">

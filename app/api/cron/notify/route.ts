@@ -4,7 +4,6 @@ import { score, shouldNotify } from '@/lib/matcher'
 import { sendEmailNotification } from '@/lib/notify/email'
 import { sendTelegramNotification } from '@/lib/notify/telegram'
 import { sendDiscordNotification } from '@/lib/notify/discord'
-import { decryptKey } from '@/lib/crypto'
 import type { Opportunity, Preferences } from '@/lib/types'
 
 export const runtime = 'nodejs'
@@ -17,11 +16,13 @@ export async function POST(req: Request) {
   }
 
   try {
-    // Fetch active opportunities (not expired)
+    // Fetch fresh opportunities (last 25h only, not expired)
+    const since = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
     const { data: opps } = await supabaseAdmin
       .from('opportunities')
       .select('*')
       .eq('is_flagged', false)
+      .gte('fetched_at', since)
       .or('deadline.is.null,deadline.gt.' + new Date().toISOString())
       .order('fetched_at', { ascending: false })
       .limit(500)
@@ -67,8 +68,7 @@ export async function POST(req: Request) {
 
           try {
             if (channel === 'email') {
-              const key = userKey?.resend_api_key ? decryptKey(userKey.resend_api_key) : undefined
-              await sendEmailNotification(user.email!, opp, result.matched, key)
+              await sendEmailNotification(user.email!, opp, result.matched, undefined, user.id)
             } else if (channel === 'telegram') {
               await sendTelegramNotification(user.telegram_id!, opp, result.matched)
             } else if (channel === 'discord') {

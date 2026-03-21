@@ -1,11 +1,13 @@
 import nodemailer from 'nodemailer'
+import { unsubscribeToken } from '../crypto'
 import type { Opportunity } from '../types'
 
 export async function sendEmailNotification(
   to: string,
   opp: Opportunity,
   matched: string[],
-  _apiKey?: string
+  _apiKey?: string,
+  userId?: string
 ) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -14,6 +16,10 @@ export async function sendEmailNotification(
       pass: process.env.GMAIL_APP_PASSWORD,
     },
   })
+
+  const unsubLink = userId
+    ? `${process.env.NEXT_PUBLIC_APP_URL}/api/unsubscribe?id=${userId}&token=${unsubscribeToken(userId)}`
+    : `${process.env.NEXT_PUBLIC_APP_URL}/preferences`
 
   await transporter.sendMail({
     from: `Scout <${process.env.GMAIL_USER}>`,
@@ -31,7 +37,8 @@ export async function sendEmailNotification(
         </a>
         <p style="margin-top:32px;color:#999;font-size:12px">
           You're receiving this because you subscribed to Scout.
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/preferences">Manage preferences</a>
+          <a href="${process.env.NEXT_PUBLIC_APP_URL}/preferences" style="color:#999">Manage preferences</a> ·
+          <a href="${unsubLink}" style="color:#999">Unsubscribe</a>
         </p>
       </div>
     `,

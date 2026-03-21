@@ -1,4 +1,4 @@
-import { createCipheriv, createDecipheriv, randomBytes } from 'crypto'
+import { createCipheriv, createDecipheriv, createHmac, randomBytes } from 'crypto'
 
 const ALG = 'aes-256-gcm'
 
@@ -23,6 +23,12 @@ export function decryptKey(stored: string): string {
   const decipher = createDecipheriv(ALG, getKey(), iv)
   decipher.setAuthTag(tag)
   return Buffer.concat([decipher.update(encrypted), decipher.final()]).toString('utf8')
+}
+
+export function unsubscribeToken(userId: string): string {
+  return createHmac('sha256', process.env.CRON_SECRET ?? 'fallback')
+    .update(userId)
+    .digest('hex')
 }
 
 export function maskKey(stored: string): string {
