@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+import sgMail from '@sendgrid/mail'
 import type { Opportunity } from '../types'
 
 export async function sendEmailNotification(
@@ -7,10 +7,10 @@ export async function sendEmailNotification(
   matched: string[],
   apiKey?: string
 ) {
-  const resend = new Resend(apiKey ?? process.env.RESEND_API_KEY!)
-  const from = process.env.RESEND_FROM_EMAIL ?? 'Scout <scout@resend.dev>'
+  sgMail.setApiKey(apiKey ?? process.env.SENDGRID_API_KEY!)
+  const from = process.env.SENDGRID_FROM_EMAIL ?? 'panuj8909@gmail.com'
 
-  await resend.emails.send({
+  await sgMail.send({
     from,
     to,
     subject: `Scout found something for you — ${opp.title}`,

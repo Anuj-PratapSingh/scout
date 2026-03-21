@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import sgMail from '@sendgrid/mail'
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
@@ -7,18 +7,22 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const key = process.env.RESEND_API_KEY
-  const from = process.env.RESEND_FROM_EMAIL
+  const key = process.env.SENDGRID_API_KEY
+  const from = process.env.SENDGRID_FROM_EMAIL ?? 'panuj8909@gmail.com'
 
-  if (!key) return NextResponse.json({ error: 'RESEND_API_KEY not set' })
+  if (!key) return NextResponse.json({ error: 'SENDGRID_API_KEY not set' })
 
-  const resend = new Resend(key)
-  const result = await resend.emails.send({
-    from: from ?? 'Scout <onboarding@resend.dev>',
-    to: 'gamelivinn@gmail.com',
-    subject: 'Scout test email',
-    html: '<p>This is a test from Scout. If you see this, email is working!</p>',
-  })
+  sgMail.setApiKey(key)
 
-  return NextResponse.json({ key_prefix: key.slice(0, 6), from, result })
+  try {
+    await sgMail.send({
+      from,
+      to: 'panuj8909@gmail.com',
+      subject: 'Scout test email',
+      html: '<p>This is a test from Scout. If you see this, email is working!</p>',
+    })
+    return NextResponse.json({ ok: true, from })
+  } catch (err: unknown) {
+    return NextResponse.json({ error: String(err) }, { status: 500 })
+  }
 }
