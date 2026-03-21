@@ -53,6 +53,17 @@ const SOURCE_DEFAULT_TAGS: Record<string, string[]> = {
   swag: ['swag', 'free'],
 }
 
+// Strip HTML tags and decode common entities — keeps plain readable text
+function stripHtml(raw: string): string {
+  return raw
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 function parseEntries(xml: string, source: string): Opportunity[] {
   try {
     const parsed = parser.parse(xml)
@@ -63,9 +74,11 @@ function parseEntries(xml: string, source: string): Opportunity[] {
     const defaultTags = SOURCE_DEFAULT_TAGS[source] ?? []
 
     return arr.map((item: Record<string, string>) => {
-      const description = (item.description ?? item.summary ?? item.content ?? '').slice(0, 500)
+      const rawDesc = item.description ?? item.summary ?? item.content ?? ''
+      const description = stripHtml(rawDesc).slice(0, 500)
+      const title = stripHtml(item.title ?? '')
       return {
-        title: item.title ?? '',
+        title,
         description,
         url: item.link ?? item.url ?? item.id ?? '',
         source,
@@ -73,8 +86,8 @@ function parseEntries(xml: string, source: string): Opportunity[] {
       }
     }).filter((o: Opportunity) => {
       if (!o.url || !o.title) return false
-      // Quality gate for blog sources: require meaningful description
-      const blogSources = ['devto', 'indiehackers', 'hackernews', 'github-blog', 'google-developers', 'aws-opensource']
+      // Blog quality gate: require meaningful description
+      const blogSources = ['devto', 'indiehackers', 'github-blog', 'google-developers', 'aws-opensource']
       if (blogSources.includes(source) && o.description.length < 30) return false
       return true
     })
