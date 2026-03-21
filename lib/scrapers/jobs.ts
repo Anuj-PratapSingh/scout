@@ -217,6 +217,77 @@ export async function scrapeKaggle(): Promise<Opportunity[]> {
   }
 }
 
+// ─── Swag & bounties ────────────────────────────────────────────────────────
+export async function scrapeSwag(): Promise<Opportunity[]> {
+  const results: Opportunity[] = []
+
+  // Hacktoberfest — annual open source swag event (Oct, but relevant year-round for prep)
+  try {
+    const res = await fetch('https://hacktoberfest.com/participation/', {
+      headers: { 'User-Agent': 'Scout/1.0' }, signal: AbortSignal.timeout(6000),
+    })
+    if (res.ok) {
+      results.push({
+        title: 'Hacktoberfest — Free swag for open source contributions',
+        description: 'Contribute to open source in October and earn free t-shirts, stickers and digital swag. Register at hacktoberfest.com.',
+        url: 'https://hacktoberfest.com',
+        source: 'swag',
+        tags: ['swag', 'open-source', 'hacktoberfest', 'free'],
+      })
+    }
+  } catch { /* skip */ }
+
+  // GitHub Student Developer Pack
+  results.push({
+    title: 'GitHub Student Developer Pack — $200k+ in free dev tools',
+    description: 'Free access to GitHub Copilot, AWS credits, DigitalOcean, JetBrains, Namecheap, and 100+ other tools for students.',
+    url: 'https://education.github.com/pack',
+    source: 'swag',
+    tags: ['swag', 'student', 'free', 'github', 'tools'],
+  })
+
+  // MLH Localhost / seasons swag
+  results.push({
+    title: 'MLH Season — Hackathon swag & prizes',
+    description: 'Major League Hacking runs 200+ hackathons per season with swag, prizes, and sponsor perks.',
+    url: 'https://mlh.io/seasons',
+    source: 'swag',
+    tags: ['swag', 'hackathon', 'mlh', 'prizes'],
+  })
+
+  // JetBrains student license
+  results.push({
+    title: 'JetBrains Free Student License — All IDEs free',
+    description: 'Free access to all JetBrains IDEs (IntelliJ, PyCharm, WebStorm, etc.) for students with a .edu email.',
+    url: 'https://www.jetbrains.com/community/education/',
+    source: 'swag',
+    tags: ['swag', 'student', 'free', 'ide'],
+  })
+
+  // Fetch bounties from Reddit r/slavelabour and r/forhire
+  try {
+    const res = await fetch('https://www.reddit.com/r/bounty+slavelabour/new.json?limit=15', {
+      headers: { 'User-Agent': 'Scout/1.0' }, signal: AbortSignal.timeout(8000),
+    })
+    if (res.ok) {
+      const data = await res.json()
+      const posts: Array<{ data: { title: string; selftext: string; url: string; permalink: string; link_flair_text: string | null } }> = data.data?.children ?? []
+      results.push(...posts
+        .filter(p => p.data.title.toLowerCase().includes('[task]') || p.data.title.toLowerCase().includes('[bounty]') || p.data.title.toLowerCase().includes('$'))
+        .map(p => ({
+          title: p.data.title,
+          description: p.data.selftext?.slice(0, 400) ?? '',
+          url: `https://reddit.com${p.data.permalink}`,
+          source: 'swag',
+          tags: ['bounty', 'paid-task', 'reddit'],
+        }))
+      )
+    }
+  } catch { /* skip */ }
+
+  return results
+}
+
 // ─── EthGlobal — web3 hackathons ────────────────────────────────────────────
 export async function scrapeEthGlobal(): Promise<Opportunity[]> {
   try {

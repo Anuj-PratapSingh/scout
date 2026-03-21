@@ -19,8 +19,6 @@
   --font-brand: 'Special Elite', 'Courier New', monospace;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-
 * { box-sizing: border-box; }
 
 body {

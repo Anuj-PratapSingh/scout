@@ -7,7 +7,7 @@ interface Opp {
   id: string; title: string; description: string; url: string
   source: string; tags: string[]; deadline?: string | null; fetched_at: string
 }
-type Kind = 'events' | 'jobs' | 'blogs' | 'repos'
+type Kind = 'events' | 'jobs' | 'blogs' | 'repos' | 'swag'
 
 // ─── Source metadata ──────────────────────────────────────────────────────────
 const SOURCE_LABEL: Record<string, string> = {
@@ -21,16 +21,32 @@ const SOURCE_LABEL: Record<string, string> = {
   ethglobal: 'ETHGlobal',
 }
 
+// Source-authoritative categorization — no keyword guessing for known sources
+const SOURCE_KIND: Record<string, Kind> = {
+  // Events & competitions
+  devpost: 'events', mlh: 'events', devfolio: 'events', unstop: 'events',
+  ctftime: 'events', hackerearth: 'events', kaggle: 'events', ethglobal: 'events',
+  // Jobs & internships
+  remotive: 'jobs', weworkremotely: 'jobs', 'hn-jobs': 'jobs',
+  internshala: 'jobs', wellfound: 'jobs',
+  // Blogs & resources
+  devto: 'blogs', indiehackers: 'blogs', 'google-developers': 'blogs',
+  'aws-opensource': 'blogs', 'eu-grants': 'blogs',
+  // Repos & cool projects (GitHub search = code repos, not events)
+  github: 'repos',
+  // Swag
+  swag: 'swag',
+}
+
 function getKind(opp: Opp): Kind {
-  const src = opp.source
-  if (['devpost', 'mlh', 'devfolio', 'unstop', 'ctftime', 'hackerearth', 'kaggle', 'ethglobal'].includes(src)) return 'events'
-  if (['remotive', 'weworkremotely', 'hn-jobs', 'internshala', 'wellfound'].includes(src)) return 'jobs'
-  if (['devto', 'indiehackers', 'google-developers', 'aws-opensource', 'eu-grants'].includes(src)) return 'blogs'
-  if (src === 'github') return 'repos'
-  const text = [opp.title, ...(opp.tags ?? [])].join(' ').toLowerCase()
-  if (['hackathon', 'contest', 'bounty', 'fellowship', 'grant', 'competition', 'kaggle', 'ctf'].some(k => text.includes(k))) return 'events'
-  if (['internship', 'intern', 'hiring', 'job', 'career', 'salary', 'remote work', 'startup'].some(k => text.includes(k))) return 'jobs'
-  return 'events'
+  // Trust the source first
+  if (SOURCE_KIND[opp.source]) return SOURCE_KIND[opp.source]
+  // For reddit/hackernews/linkedin — infer from tags (set during scraping, more reliable than title matching)
+  const tags = (opp.tags ?? []).join(' ').toLowerCase()
+  if (['swag', 'free stuff', 'giveaway', 'sticker'].some(k => tags.includes(k))) return 'swag'
+  if (['job', 'hiring', 'internship', 'salary', 'remote'].some(k => tags.includes(k))) return 'jobs'
+  if (['hackathon', 'contest', 'bounty', 'grant', 'fellowship', 'competition'].some(k => tags.includes(k))) return 'events'
+  return 'events' // default for mixed sources
 }
 
 // ─── Radar background ─────────────────────────────────────────────────────────
@@ -202,8 +218,9 @@ const TABS: { key: Kind | 'all'; label: string; icon: string }[] = [
   { key: 'all', label: 'All', icon: '🔭' },
   { key: 'events', label: 'Events & Hackathons', icon: '🏆' },
   { key: 'jobs', label: 'Jobs & Internships', icon: '💼' },
+  { key: 'swag', label: 'Swag & Bounties', icon: '🎁' },
+  { key: 'repos', label: 'CS Projects', icon: '🛠' },
   { key: 'blogs', label: 'Blogs & Resources', icon: '📝' },
-  { key: 'repos', label: 'Repos', icon: '🛠' },
 ]
 
 export default function Home() {
@@ -225,6 +242,7 @@ export default function Home() {
     jobs: opps.filter(o => getKind(o) === 'jobs'),
     blogs: opps.filter(o => getKind(o) === 'blogs'),
     repos: opps.filter(o => getKind(o) === 'repos'),
+    swag: opps.filter(o => getKind(o) === 'swag'),
   }
   const filtered = activeTab === 'all' ? opps : categorized[activeTab]
 

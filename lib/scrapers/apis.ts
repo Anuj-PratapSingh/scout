@@ -60,9 +60,9 @@ export async function scrapeMLH(): Promise<Opportunity[]> {
   }
 }
 
-// GitHub search — repos tagged as hackathon/bounty (no auth, 60 req/hr)
+// GitHub search — trending CS repos useful for students
 export async function scrapeGitHub(): Promise<Opportunity[]> {
-  const queries = ['topic:hackathon', 'topic:bounty']
+  const queries = ['topic:computer-science', 'topic:algorithms', 'topic:interview-prep', 'topic:awesome']
   const results: Opportunity[] = []
 
   for (const q of queries) {
