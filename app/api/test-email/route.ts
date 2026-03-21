@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   try {
     await sgMail.send({
       from,
-      to: 'panuj8909@gmail.com',
+      to: 'anujpratapsingh00000@gmail.com',
       subject: 'Scout test email',
       html: '<p>This is a test from Scout. If you see this, email is working!</p>',
     })
