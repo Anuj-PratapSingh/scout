@@ -2,59 +2,65 @@ import Link from 'next/link'
 
 const STEPS = [
   {
-    step: 'Step 1',
+    n: '01',
     title: 'Connect your channels',
     items: [
-      { label: 'Email', desc: 'You\'re already set if you signed up with email. Scout will send alerts directly to your inbox.' },
-      { label: 'Telegram', desc: 'Search @ScoutOpBot on Telegram → press Start → follow the 3-question setup. Takes 60 seconds.' },
-      { label: 'Discord', desc: 'Invite the Scout bot to your server, then run /scout-subscribe. Scout will DM you directly.' },
+      { label: '📧 Email', desc: 'Already set if you signed up with email. Scout sends a daily digest — or instant alerts for perfect matches.' },
+      { label: '✈️ Telegram', desc: 'Search @ScoutOpBot on Telegram → press Start → follow the 3-question setup. Takes 60 seconds.' },
+      { label: '🎮 Discord', desc: 'Invite the Scout bot to your server, then run /scout-subscribe. Scout will DM you directly.' },
     ],
   },
   {
-    step: 'Step 2',
+    n: '02',
     title: 'Set your preferences',
     items: [
       { label: 'Categories', desc: 'Pick what you care about: hackathons, internships, bounties, swag, programs, contests.' },
-      { label: 'Custom criteria', desc: 'Plain English, e.g. "remote only", "Python", "prizes over $1000". Scout matches against these.' },
-      { label: 'Match threshold', desc: 'Set a minimum score (1–10). Scout only notifies you when enough criteria match — no noise.' },
+      { label: 'Custom criteria', desc: 'Plain English — e.g. "remote only", "Python", "prizes over $1000". Scout matches against these.' },
+      { label: 'Match threshold', desc: 'Set a minimum score (1–10). Prevents noise — Scout only pings you when enough criteria match.' },
       { label: 'Compulsory criteria', desc: 'Hard filters. e.g. "virtual" — Scout will never send you in-person opportunities.' },
     ],
   },
   {
-    step: 'Step 3 (optional)',
-    title: 'Add your own API keys',
+    n: '03',
+    title: 'Add your own API keys (optional)',
     items: [
-      { label: 'Reddit OAuth', desc: 'Get client ID + secret at reddit.com/prefs/apps → creates app. Unlocks higher rate limits.' },
-      { label: 'Google Custom Search', desc: 'console.cloud.google.com → enable Custom Search JSON API → get key + CX ID. Finds LinkedIn posts.' },
-      { label: 'Resend', desc: 'resend.com → create API key. Gives you your own email quota, isolated from other Scout users.' },
+      { label: 'Reddit OAuth', desc: 'Client ID + secret from reddit.com/prefs/apps. Unlocks higher rate limits.' },
+      { label: 'Google Custom Search', desc: 'Enables LinkedIn post scraping. console.cloud.google.com → enable Custom Search API.' },
     ],
   },
 ]
 
 export default function OnboardingPage() {
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-        <Link href="/" className="text-xl font-bold tracking-tight">Scout</Link>
-        <Link href="/preferences" className="text-sm text-white/60 hover:text-white transition">
-          Set preferences →
+    <main style={{ minHeight: '100vh', background: 'var(--bg)' }}>
+      <nav className="nav">
+        <Link href="/" style={{ fontFamily: 'var(--font-head)', fontSize: '1.3rem', textDecoration: 'none', color: 'var(--ink)' }}>
+          <span style={{ background: 'var(--ink)', color: 'var(--bg)', padding: '2px 10px', borderRadius: '1px' }}>Scout</span>
         </Link>
+        <Link href="/preferences" className="btn" style={{ fontSize: '0.85rem' }}>Set preferences →</Link>
       </nav>
 
-      <div className="max-w-2xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold mb-2">Getting started</h1>
-        <p className="text-white/50 mb-12">Three steps. Most people are live in under 2 minutes.</p>
+      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '4rem 1.5rem' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '0.5rem' }}>
+          Getting started
+        </p>
+        <h1 style={{ fontFamily: 'var(--font-head)', fontSize: '2.2rem', marginBottom: '0.5rem' }}>You're in.</h1>
+        <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-mid)', marginBottom: '3rem' }}>
+          Three steps. Most people are live in under 2 minutes.
+        </p>
 
-        <div className="space-y-16">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
           {STEPS.map(section => (
-            <div key={section.step}>
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-1">{section.step}</p>
-              <h2 className="text-2xl font-semibold mb-6">{section.title}</h2>
-              <div className="space-y-4">
+            <div key={section.n}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--ink-faint)', border: 'var(--border)', padding: '1px 6px', borderRadius: '2px' }}>{section.n}</span>
+                <h2 style={{ fontFamily: 'var(--font-head)', fontSize: '1.25rem', margin: 0 }}>{section.title}</h2>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 {section.items.map(item => (
-                  <div key={item.label} className="border border-white/10 rounded-xl p-5 hover:border-white/20 transition">
-                    <h3 className="font-medium mb-1">{item.label}</h3>
-                    <p className="text-white/50 text-sm">{item.desc}</p>
+                  <div key={item.label} style={{ border: 'var(--border)', boxShadow: 'var(--shadow-sm)', padding: '0.9rem 1rem', borderRadius: '2px', background: 'var(--bg)' }}>
+                    <h3 style={{ fontFamily: 'var(--font-head)', fontSize: '0.95rem', margin: '0 0 0.3rem' }}>{item.label}</h3>
+                    <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-mid)', fontSize: '0.88rem', margin: 0 }}>{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -62,8 +68,8 @@ export default function OnboardingPage() {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <Link href="/preferences" className="bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-white/90 transition">
+        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+          <Link href="/preferences" className="btn btn-filled" style={{ fontSize: '1rem', padding: '0.65rem 1.75rem' }}>
             Set my preferences →
           </Link>
         </div>

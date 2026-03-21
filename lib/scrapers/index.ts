@@ -1,3 +1,18 @@
+const TRACKING_PARAMS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','ref','referrer','fbclid','gclid']
+
+function normalizeUrl(raw: string): string {
+  try {
+    const u = new URL(raw)
+    TRACKING_PARAMS.forEach(p => u.searchParams.delete(p))
+    u.hash = ''
+    // Remove trailing slash for consistency
+    u.pathname = u.pathname.replace(/\/$/, '') || '/'
+    return u.toString().toLowerCase()
+  } catch {
+    return raw
+  }
+}
+
 import { scrapeHackerNews } from './hackernews'
 import { scrapeReddit } from './reddit'
 import { scrapeRSS, scrapeGoogleCSE } from './rss'
@@ -35,10 +50,13 @@ export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> 
 
   if (clean.length === 0) return 0
 
+  // Normalize URLs before upsert to improve deduplication
+  const normalized = clean.map(o => ({ ...o, url: normalizeUrl(o.url) }))
+
   // Upsert — url is unique, so duplicates are silently ignored
   const { error } = await supabaseAdmin
     .from('opportunities')
-    .upsert(clean, { onConflict: 'url', ignoreDuplicates: true })
+    .upsert(normalized, { onConflict: 'url', ignoreDuplicates: true })
 
   if (error) throw new Error(`DB upsert failed: ${error.message}`)
 

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { CATEGORIES } from '@/lib/types'
+import Link from 'next/link'
 
 export default function PreferencesPage() {
   const [categories, setCategories] = useState<string[]>([])
@@ -63,33 +64,40 @@ export default function PreferencesPage() {
     setTimeout(() => setSaved(false), 2000)
   }
 
+  const label = (text: string) => (
+    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 0.6rem' }}>{text}</p>
+  )
+
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-        <span className="text-xl font-bold tracking-tight">Scout</span>
-        <a href="/" className="text-sm text-white/60 hover:text-white transition">← Home</a>
+    <main style={{ minHeight: '100vh', background: 'var(--bg)' }}>
+      <nav className="nav">
+        <Link href="/" style={{ fontFamily: 'var(--font-head)', fontSize: '1.3rem', textDecoration: 'none', color: 'var(--ink)' }}>
+          <span style={{ background: 'var(--ink)', color: 'var(--bg)', padding: '2px 10px', borderRadius: '1px' }}>Scout</span>
+        </Link>
+        <Link href="/" style={{ fontFamily: 'var(--font-head)', fontSize: '0.85rem', color: 'var(--ink-faint)', textDecoration: 'none' }}>← Home</Link>
       </nav>
 
-      <div className="max-w-2xl mx-auto px-6 py-12 space-y-10">
-        <div>
-          <h1 className="text-3xl font-bold mb-1">Your preferences</h1>
-          <p className="text-white/50 text-sm">Scout only pings you when something matches what you care about.</p>
-        </div>
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '3rem 1.5rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-head)', fontSize: '2rem', marginBottom: '0.3rem' }}>Your preferences</h1>
+        <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-mid)', marginBottom: '2.5rem' }}>
+          Scout only pings you when something matches what you care about.
+        </p>
 
         {/* Categories */}
-        <section>
-          <h2 className="font-semibold mb-3">Opportunity types</h2>
-          <div className="flex flex-wrap gap-2">
+        <section style={{ marginBottom: '2rem' }}>
+          {label('Opportunity types')}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => toggleCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm border transition ${
-                  categories.includes(cat)
-                    ? 'bg-white text-black border-white'
-                    : 'border-white/20 text-white/60 hover:border-white/40'
-                }`}
-              >
+              <button key={cat} onClick={() => toggleCategory(cat)}
+                style={{
+                  fontFamily: 'var(--font-head)', fontSize: '0.85rem', border: 'var(--border)',
+                  boxShadow: categories.includes(cat) ? 'none' : 'var(--shadow-sm)',
+                  padding: '0.3rem 0.9rem', borderRadius: '2px', cursor: 'pointer',
+                  background: categories.includes(cat) ? 'var(--ink)' : 'var(--bg)',
+                  color: categories.includes(cat) ? 'var(--bg)' : 'var(--ink)',
+                  transform: categories.includes(cat) ? 'translate(2px, 2px)' : 'none',
+                  transition: 'all 0.1s',
+                }}>
                 {cat}
               </button>
             ))}
@@ -97,36 +105,32 @@ export default function PreferencesPage() {
         </section>
 
         {/* Custom criteria */}
-        <section>
-          <h2 className="font-semibold mb-1">Custom criteria</h2>
-          <p className="text-white/40 text-sm mb-3">e.g. &quot;remote only&quot;, &quot;Python&quot;, &quot;prizes over $1000&quot;</p>
-          <div className="flex gap-2 mb-3">
+        <section style={{ marginBottom: '2rem' }}>
+          {label('Custom criteria')}
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
+            e.g. "remote only", "Python", "prizes over $1000"
+          </p>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
             <input
               value={criteriaInput}
               onChange={e => setCriteriaInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && addCriterion()}
-              placeholder="Add a criterion..."
-              className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/40"
+              placeholder="Add a criterion…"
+              className="sketch-input"
+              style={{ flex: 1 }}
             />
-            <button onClick={addCriterion} className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-xl text-sm transition">
-              Add
-            </button>
+            <button onClick={addCriterion} className="btn" style={{ flexShrink: 0 }}>Add</button>
           </div>
-          <div className="space-y-2">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {criteria.map(c => (
-              <div key={c} className="flex items-center justify-between border border-white/10 rounded-xl px-4 py-2">
-                <span className="text-sm">{c}</span>
-                <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-1.5 text-xs text-white/50 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={compulsory.includes(c)}
-                      onChange={() => toggleCompulsory(c)}
-                      className="accent-white"
-                    />
+              <div key={c} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: 'var(--border)', boxShadow: 'var(--shadow-sm)', padding: '0.5rem 0.9rem', borderRadius: '2px', background: 'var(--bg)' }}>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>{c}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--ink-faint)', cursor: 'pointer' }}>
+                    <input type="checkbox" checked={compulsory.includes(c)} onChange={() => toggleCompulsory(c)} />
                     must match
                   </label>
-                  <button onClick={() => removeCriterion(c)} className="text-white/30 hover:text-white/70 text-xs transition">✕</button>
+                  <button onClick={() => removeCriterion(c)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-head)', color: 'var(--ink-faint)', fontSize: '0.9rem', padding: '0 4px' }}>✕</button>
                 </div>
               </div>
             ))}
@@ -134,57 +138,51 @@ export default function PreferencesPage() {
         </section>
 
         {/* Match threshold */}
-        <section>
-          <h2 className="font-semibold mb-1">Match threshold: <span className="text-white/60">{threshold}/10</span></h2>
-          <p className="text-white/40 text-sm mb-3">Scout notifies you only when at least this many criteria match.</p>
-          <input
-            type="range"
-            min={1} max={10}
-            value={threshold}
-            onChange={e => setThreshold(Number(e.target.value))}
-            className="w-full accent-white"
-          />
-          <div className="flex justify-between text-xs text-white/30 mt-1">
-            <span>1 — notify often</span>
-            <span>10 — notify rarely</span>
+        <section style={{ marginBottom: '2rem' }}>
+          {label('Match threshold')}
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
+            Scout notifies you when at least this many criteria match.
+          </p>
+          <div style={{ border: 'var(--border)', boxShadow: 'var(--shadow-sm)', padding: '1rem 1.25rem', borderRadius: '2px', background: 'var(--bg)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>Threshold</span>
+              <span style={{ fontFamily: 'var(--font-head)', fontSize: '1rem' }}>{threshold}<span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--ink-faint)' }}>/10</span></span>
+            </div>
+            <input type="range" min={1} max={10} value={threshold} onChange={e => setThreshold(Number(e.target.value))} style={{ width: '100%' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--ink-faint)', marginTop: '0.25rem' }}>
+              <span>1 — notify often</span><span>10 — notify rarely</span>
+            </div>
           </div>
         </section>
 
-        {/* BYOK API Keys */}
-        <section>
-          <h2 className="font-semibold mb-1">API Keys <span className="text-white/30 font-normal text-sm">(optional)</span></h2>
-          <p className="text-white/40 text-sm mb-4">
-            Scout works without these. Add your own keys to unlock higher limits and more sources.
-            Keys are encrypted and never shared.
+        {/* BYOK */}
+        <section style={{ marginBottom: '2.5rem' }}>
+          {label('API Keys (optional)')}
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
+            Scout works without these. Add your own keys to unlock higher limits.
           </p>
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
-              { field: 'reddit_client_id', label: 'Reddit Client ID', placeholder: '••••••••a1b2', hint: 'reddit.com/prefs/apps' },
-              { field: 'reddit_client_secret', label: 'Reddit Client Secret', placeholder: '••••••••a1b2', hint: '' },
-              { field: 'google_cse_key', label: 'Google CSE API Key', placeholder: '••••••••a1b2', hint: 'console.cloud.google.com' },
-              { field: 'google_cse_id', label: 'Google CSE ID', placeholder: '••••••••a1b2', hint: 'cse.google.com' },
-            ].map(({ field, label, placeholder, hint }) => (
+              { field: 'reddit_client_id', label: 'Reddit Client ID', hint: 'reddit.com/prefs/apps' },
+              { field: 'reddit_client_secret', label: 'Reddit Client Secret', hint: '' },
+              { field: 'google_cse_key', label: 'Google CSE API Key', hint: 'console.cloud.google.com' },
+              { field: 'google_cse_id', label: 'Google CSE ID', hint: 'cse.google.com' },
+            ].map(({ field, label: lbl, hint }) => (
               <div key={field}>
-                <label className="text-xs text-white/50 block mb-1">
-                  {label}{hint && <span className="ml-2 text-white/30">— {hint}</span>}
-                </label>
-                <input
-                  type="password"
-                  placeholder={placeholder}
-                  onChange={e => setApiKeys((prev: Record<string, string>) => ({ ...prev, [field]: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30"
-                />
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--ink-faint)', margin: '0 0 4px' }}>
+                  {lbl}{hint && ` — ${hint}`}
+                </p>
+                <input type="password" placeholder="••••••••"
+                  onChange={e => setApiKeys(prev => ({ ...prev, [field]: e.target.value }))}
+                  className="sketch-input" />
               </div>
             ))}
           </div>
         </section>
 
-        <button
-          onClick={save}
-          disabled={saving}
-          className="w-full bg-white text-black font-semibold py-3 rounded-xl hover:bg-white/90 transition disabled:opacity-50"
-        >
-          {saved ? 'Saved ✓' : saving ? 'Saving...' : 'Save preferences'}
+        <button onClick={save} disabled={saving} className="btn btn-filled"
+          style={{ width: '100%', fontSize: '1rem', padding: '0.7rem', justifyContent: 'center' }}>
+          {saved ? '✓ Saved' : saving ? 'Saving…' : 'Save preferences'}
         </button>
       </div>
     </main>

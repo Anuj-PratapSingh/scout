@@ -10,7 +10,9 @@
       "Bash(curl -s -X POST \"https://scouttheeventcompanion.vercel.app/api/cron/scout\" -H \"Authorization: Bearer generate-a-random-string-here-maybe-this-is-the-one\")",
       "Bash(python -m json.tool)",
       "Bash(curl -s -X POST https://scouttheeventcompanion.vercel.app/api/cron/scout -H 'Authorization: Bearer generate-a-random-string-here-maybe-this-is-the-one')",
-      "Bash(cat /c/Users/piepama/scout/supabase/migrations/*.sql)"
+      "Bash(cat /c/Users/piepama/scout/supabase/migrations/*.sql)",
+      "WebFetch(domain:codesensei-six.vercel.app)",
+      "WebSearch"
     ]
   }
 }

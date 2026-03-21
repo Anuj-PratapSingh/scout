@@ -1,19 +1,20 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Scout — Opportunity Radar",
-  description: "Scout monitors the internet for hackathons, internships, bounties and more — and notifies you the moment something matches your criteria.",
-};
+  title: 'Scout — Opportunity Radar',
+  description: 'Scout monitors the internet for hackathons, internships, bounties and more — and notifies you the moment something matches your criteria.',
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet" />
+      </head>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
