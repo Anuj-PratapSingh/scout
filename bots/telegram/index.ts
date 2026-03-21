@@ -1,11 +1,44 @@
 import { Telegraf, Scenes, session } from 'telegraf'
 import { supabaseAdmin } from '@/lib/supabase'
+import { score, shouldNotify } from '@/lib/matcher'
 import { CATEGORIES } from '@/lib/types'
-import type { Opportunity } from '@/lib/types'
+import type { Opportunity, Preferences } from '@/lib/types'
 
 type ScoutWizardContext = Scenes.WizardContext & {
   wizard: Scenes.WizardContextWizard<Scenes.WizardContext> & {
     state: { categories?: string[]; criteria?: string[] }
+  }
+}
+
+// After setup, immediately find and send matching opps from DB
+async function sendInstantMatches(ctx: ScoutWizardContext, prefs: Preferences) {
+  const { data: opps } = await supabaseAdmin
+    .from('opportunities')
+    .select('*')
+    .eq('is_flagged', false)
+    .or(`deadline.is.null,deadline.gt.${new Date().toISOString()}`)
+    .order('fetched_at', { ascending: false })
+    .limit(200)
+
+  const matches = (opps ?? [] as Opportunity[])
+    .map(opp => ({ opp: opp as Opportunity, result: score(opp as Opportunity, prefs) }))
+    .filter(({ result }) => shouldNotify(result, prefs.match_threshold))
+    .slice(0, 5)
+
+  if (!matches.length) {
+    await ctx.reply("No matches in the DB yet — I'll ping you as soon as I find something! 📡")
+    return
+  }
+
+  await ctx.reply(`🔥 Found ${matches.length} matching opportunit${matches.length === 1 ? 'y' : 'ies'} right now:`)
+
+  for (const { opp, result } of matches) {
+    const matchedText = result.matched.length ? `\n✅ Matched: ${result.matched.join(', ')}` : ''
+    const deadlineText = opp.deadline ? `\n⏰ Deadline: ${new Date(opp.deadline).toDateString()}` : ''
+    await ctx.reply(
+      `🎯 *${escapeMarkdown(opp.title)}*\nSource: ${opp.source}${matchedText}${deadlineText}\n\n[View →](${opp.url})`,
+      { parse_mode: 'Markdown' }
+    )
   }
 }
 
@@ -17,10 +50,10 @@ const onboardingScene = new Scenes.WizardScene<ScoutWizardContext>(
   async ctx => {
     await ctx.reply(
       "Hey! I'm Scout 🎯\n\n" +
-      "I scan the internet for hackathons, internships, bounties, swag drops, programs like YC — and ping you when something matches.\n\n" +
+      "I scan 20+ sources for hackathons, internships, bounties, swag drops, YC-style programs — and ping you when something matches.\n\n" +
       "What types of opportunities do you want?\n\n" +
       CATEGORIES.map((c, i) => `${i + 1}. ${c}`).join('\n') +
-      '\n\nReply with numbers (e.g. "1 3 5") or just say "all"'
+      '\n\nReply with numbers separated by spaces (e.g. "1 3 5") or just say "all"'
     )
     return ctx.wizard.next()
   },
@@ -28,17 +61,17 @@ const onboardingScene = new Scenes.WizardScene<ScoutWizardContext>(
   // Step 2: ask custom criteria
   async ctx => {
     const text = (ctx.message && 'text' in ctx.message ? ctx.message.text : '').toLowerCase()
-    ctx.wizard.state.categories = text === 'all'
+    ctx.wizard.state.categories = text.trim() === 'all'
       ? [...CATEGORIES]
       : CATEGORIES.filter((_, i) => text.includes(String(i + 1)))
 
     await ctx.reply(
-      'Any specific criteria?\n\nExamples: "remote only", "Python", "prizes over $1000"\n\nComma-separated, or type "skip"'
+      'Any specific criteria?\n\nExamples: "remote only", "Python", "prizes over $1000"\n\nSend comma-separated keywords, or type "skip"'
     )
     return ctx.wizard.next()
   },
 
-  // Step 3: ask threshold then save
+  // Step 3: ask threshold
   async ctx => {
     const text = ctx.message && 'text' in ctx.message ? ctx.message.text.trim() : ''
     ctx.wizard.state.criteria = text.toLowerCase() === 'skip'
@@ -46,12 +79,16 @@ const onboardingScene = new Scenes.WizardScene<ScoutWizardContext>(
       : text.split(',').map(s => s.trim()).filter(Boolean)
 
     await ctx.reply(
-      'Last one: minimum match score? (1–10)\n\nDefault is 5 — reply with a number or "default"'
+      'Last one: minimum match score? (1–10)\n\n' +
+      '1 = notify me about almost everything\n' +
+      '5 = balanced (recommended)\n' +
+      '10 = only perfect matches\n\n' +
+      'Reply with a number or "default" (5)'
     )
     return ctx.wizard.next()
   },
 
-  // Done — save to DB
+  // Done — save to DB then send instant matches
   async ctx => {
     const text = ctx.message && 'text' in ctx.message ? ctx.message.text.trim() : ''
     const threshold = text.toLowerCase() === 'default' ? 5 : Math.min(10, Math.max(1, parseInt(text) || 5))
@@ -79,8 +116,20 @@ const onboardingScene = new Scenes.WizardScene<ScoutWizardContext>(
       `Categories: ${categories.join(', ') || 'all'}\n` +
       `Criteria: ${criteria.length ? criteria.join(', ') : 'none'}\n` +
       `Min match score: ${threshold}/10\n\n` +
-      `I'll ping you when I find something.\n\nCommands: /latest /pause /help`
+      `Searching the database for matches now…`
     )
+
+    const prefs: Preferences = {
+      user_id: user?.id ?? '',
+      categories,
+      custom_criteria: criteria,
+      compulsory_criteria: [],
+      match_threshold: threshold,
+    }
+
+    await sendInstantMatches(ctx, prefs)
+
+    await ctx.reply('Commands: /latest /pause /help')
     return ctx.scene.leave()
   }
 )
@@ -97,31 +146,57 @@ bot.start(ctx => ctx.scene.enter('onboarding'))
 bot.help(ctx => ctx.reply(
   'Scout commands:\n\n' +
   '/start — set up or reset preferences\n' +
-  '/latest — show last 5 opportunities\n' +
+  '/latest — show last 5 matching opportunities\n' +
   '/pause — pause notifications\n' +
   '/resume — resume notifications\n' +
   '/help — show this message'
 ))
 
 bot.command('latest', async ctx => {
+  const telegramId = String(ctx.from.id)
+
+  // Get user + prefs
+  const { data: user } = await supabaseAdmin
+    .from('users')
+    .select('id, preferences(*)')
+    .eq('telegram_id', telegramId)
+    .single()
+
+  const prefs = user ? (Array.isArray(user.preferences) ? user.preferences[0] : user.preferences) as Preferences | undefined : undefined
+
   const { data: opps } = await supabaseAdmin
     .from('opportunities')
-    .select('title, url, source')
+    .select('*')
     .eq('is_flagged', false)
     .or(`deadline.is.null,deadline.gt.${new Date().toISOString()}`)
     .order('fetched_at', { ascending: false })
-    .limit(5)
+    .limit(200)
 
   if (!opps?.length) {
-    await ctx.reply('Nothing yet — Scout is warming up. Check back soon!')
+    await ctx.reply('Nothing in the DB yet — Scout is warming up. Check back soon!')
     return
   }
 
-  const msg = (opps as Partial<Opportunity>[]).map((o, i) =>
-    `${i + 1}. *${o.title}*\nSource: ${o.source}\n[View →](${o.url})`
-  ).join('\n\n')
+  const matches = prefs
+    ? (opps as Opportunity[])
+        .map(opp => ({ opp, result: score(opp, prefs) }))
+        .filter(({ result }) => shouldNotify(result, prefs.match_threshold))
+        .slice(0, 5)
+    : (opps as Opportunity[]).slice(0, 5).map(opp => ({ opp, result: { score: 0, matched: [], blocked: false } }))
 
-  await ctx.reply(msg, { parse_mode: 'Markdown' })
+  if (!matches.length) {
+    await ctx.reply("No matches with your current preferences. Try /start to adjust them.")
+    return
+  }
+
+  for (const { opp, result } of matches) {
+    const matchedText = result.matched.length ? `\n✅ Matched: ${result.matched.join(', ')}` : ''
+    const deadlineText = opp.deadline ? `\n⏰ Deadline: ${new Date(opp.deadline).toDateString()}` : ''
+    await ctx.reply(
+      `🎯 *${escapeMarkdown(opp.title)}*\nSource: ${opp.source}${matchedText}${deadlineText}\n\n[View →](${opp.url})`,
+      { parse_mode: 'Markdown' }
+    )
+  }
 })
 
 bot.command('pause', async ctx => {
@@ -137,6 +212,10 @@ bot.command('resume', async ctx => {
 bot.command('preferences', ctx =>
   ctx.reply(`Update your preferences: ${process.env.NEXT_PUBLIC_APP_URL}/preferences`)
 )
+
+function escapeMarkdown(text: string): string {
+  return text.replace(/[_*[\]()~`>#+=|{}.!-]/g, '\\$&')
+}
 
 export default bot
 export const webhookHandler = bot.webhookCallback('/api/telegram/webhook')
