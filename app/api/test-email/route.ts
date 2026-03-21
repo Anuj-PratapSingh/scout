@@ -15,14 +15,15 @@ export async function GET(req: Request) {
   sgMail.setApiKey(key)
 
   try {
-    await sgMail.send({
+    const [response] = await sgMail.send({
       from,
       to: 'anujpratapsingh00000@gmail.com',
       subject: 'Scout test email',
       html: '<p>This is a test from Scout. If you see this, email is working!</p>',
     })
-    return NextResponse.json({ ok: true, from })
+    return NextResponse.json({ ok: true, from, statusCode: response.statusCode, headers: response.headers })
   } catch (err: unknown) {
-    return NextResponse.json({ error: String(err) }, { status: 500 })
+    const e = err as { response?: { body?: unknown; status?: number } }
+    return NextResponse.json({ error: String(err), body: e?.response?.body, status: e?.response?.status }, { status: 500 })
   }
 }
