@@ -1,17 +1,22 @@
-import sgMail from '@sendgrid/mail'
+import nodemailer from 'nodemailer'
 import type { Opportunity } from '../types'
 
 export async function sendEmailNotification(
   to: string,
   opp: Opportunity,
   matched: string[],
-  apiKey?: string
+  _apiKey?: string
 ) {
-  sgMail.setApiKey(apiKey ?? process.env.SENDGRID_API_KEY!)
-  const from = process.env.SENDGRID_FROM_EMAIL ?? 'panuj8909@gmail.com'
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  })
 
-  await sgMail.send({
-    from,
+  await transporter.sendMail({
+    from: `Scout <${process.env.GMAIL_USER}>`,
     to,
     subject: `Scout found something for you — ${opp.title}`,
     html: `

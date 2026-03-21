@@ -4,7 +4,9 @@
       "Bash(npm install:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(npx vercel:*)"
+      "Bash(npx vercel:*)",
+      "Bash(printf 'anujpratapsingh00000@gmail.com')",
+      "Bash(printf 'wpggcutavkonbvyc')"
     ]
   }
 }

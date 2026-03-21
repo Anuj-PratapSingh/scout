@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import sgMail from '@sendgrid/mail'
+import nodemailer from 'nodemailer'
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
@@ -7,23 +7,25 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const key = process.env.SENDGRID_API_KEY
-  const from = process.env.SENDGRID_FROM_EMAIL ?? 'panuj8909@gmail.com'
+  const user = process.env.GMAIL_USER
+  const pass = process.env.GMAIL_APP_PASSWORD
 
-  if (!key) return NextResponse.json({ error: 'SENDGRID_API_KEY not set' })
+  if (!user || !pass) return NextResponse.json({ error: 'GMAIL_USER or GMAIL_APP_PASSWORD not set' })
 
-  sgMail.setApiKey(key)
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass },
+  })
 
   try {
-    const [response] = await sgMail.send({
-      from,
-      to: 'anujpratapsingh00000@gmail.com',
+    const info = await transporter.sendMail({
+      from: `Scout <${user}>`,
+      to: user,
       subject: 'Scout test email',
       html: '<p>This is a test from Scout. If you see this, email is working!</p>',
     })
-    return NextResponse.json({ ok: true, from, statusCode: response.statusCode, headers: response.headers })
+    return NextResponse.json({ ok: true, from: user, messageId: info.messageId })
   } catch (err: unknown) {
-    const e = err as { response?: { body?: unknown; status?: number } }
-    return NextResponse.json({ error: String(err), body: e?.response?.body, status: e?.response?.status }, { status: 500 })
+    return NextResponse.json({ error: String(err) }, { status: 500 })
   }
 }
