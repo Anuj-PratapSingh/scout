@@ -24,7 +24,8 @@ export async function GET(req: Request) {
   // Run matcher for each user against each opp
   const matches = []
   for (const user of users ?? []) {
-    const prefs = (user.preferences as unknown as Preferences[])?.[0]
+    const prefsRaw = user.preferences as unknown
+    const prefs = (Array.isArray(prefsRaw) ? prefsRaw[0] : prefsRaw) as Preferences | undefined
     if (!prefs) continue
     for (const opp of (opps ?? []) as Opportunity[]) {
       const result = score(opp, prefs)

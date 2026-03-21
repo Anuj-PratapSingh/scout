@@ -57,9 +57,11 @@ export async function POST(req: Request) {
   let notified = 0
 
   for (const user of users) {
-    const prefs = (user.preferences as unknown as Preferences[])?.[0]
+    const prefsRaw = user.preferences as unknown
+    const prefs = (Array.isArray(prefsRaw) ? prefsRaw[0] : prefsRaw) as Preferences | undefined
     if (!prefs) continue
-    const userKey = (user.user_keys as unknown as Record<string, string>[])?.[0]
+    const userKeysRaw = user.user_keys as unknown
+    const userKey = (Array.isArray(userKeysRaw) ? userKeysRaw[0] : userKeysRaw) as Record<string, string> | undefined
 
     for (const opp of opps as Opportunity[]) {
       const result = score(opp, prefs)
