@@ -4,22 +4,30 @@ import type { Opportunity } from '../types'
 const parser = new XMLParser({ ignoreAttributes: false })
 
 const RSS_FEEDS = [
+  // Hackathons & competitions
   { url: 'https://devpost.com/hackathons.atom', source: 'devpost' },
+  // Remote jobs & internships
+  { url: 'https://remotive.com/remote-jobs/feed/', source: 'remotive' },
+  { url: 'https://weworkremotely.com/remote-programming-jobs.rss', source: 'weworkremotely' },
+  { url: 'https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss', source: 'weworkremotely' },
+  // Dev.to tags
   { url: 'https://dev.to/feed/tag/hacktoberfest', source: 'devto' },
   { url: 'https://dev.to/feed/tag/opensource', source: 'devto' },
-]
-
-// Curated Nitter accounts — Twitter via RSS, no API key needed
-const NITTER_ACCOUNTS = [
-  'MLHacks', 'devpost', 'ycombinator', 'github',
-  'buildspace', 'hackclub', 'AngelHack', 'Replit',
-  'Microsoft', 'Google', 'vercel',
-]
-
-const NITTER_INSTANCES = [
-  'nitter.net',
-  'nitter.privacydev.net',
-  'nitter.catsarch.com',
+  { url: 'https://dev.to/feed/tag/hiring', source: 'devto' },
+  { url: 'https://dev.to/feed/tag/career', source: 'devto' },
+  { url: 'https://dev.to/feed/tag/showdev', source: 'devto' },
+  // GitHub blog (bounties, programs, grants)
+  { url: 'https://github.blog/feed/', source: 'github' },
+  // Hacker News jobs (separate from stories)
+  { url: 'https://news.ycombinator.com/rss', source: 'hackernews' },
+  // IndieHackers
+  { url: 'https://www.indiehackers.com/feed.xml', source: 'indiehackers' },
+  // EU startup & grant news
+  { url: 'https://ec.europa.eu/newsroom/dae/rss.cfm?page=2226&lg=EN', source: 'eu-grants' },
+  // Google Developers blog
+  { url: 'https://developers.googleblog.com/atom.xml', source: 'google-developers' },
+  // AWS open source blog (bounties, programs)
+  { url: 'https://aws.amazon.com/blogs/opensource/feed/', source: 'aws-opensource' },
 ]
 
 async function fetchFeed(url: string): Promise<string | null> {
@@ -54,27 +62,12 @@ function parseEntries(xml: string, source: string): Opportunity[] {
   }
 }
 
-async function scrapeNitter(account: string): Promise<Opportunity[]> {
-  for (const instance of NITTER_INSTANCES) {
-    const xml = await fetchFeed(`https://${instance}/${account}/rss`)
-    if (xml) return parseEntries(xml, `twitter:${account}`)
-  }
-  return []
-}
-
 export async function scrapeRSS(): Promise<Opportunity[]> {
   const results: Opportunity[] = []
 
-  // RSS feeds
   await Promise.all(RSS_FEEDS.map(async ({ url, source }) => {
     const xml = await fetchFeed(url)
     if (xml) results.push(...parseEntries(xml, source))
-  }))
-
-  // Nitter (Twitter RSS, no key needed)
-  await Promise.all(NITTER_ACCOUNTS.map(async account => {
-    const opps = await scrapeNitter(account)
-    results.push(...opps)
   }))
 
   return results

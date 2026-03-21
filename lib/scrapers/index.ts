@@ -1,6 +1,7 @@
 import { scrapeHackerNews } from './hackernews'
 import { scrapeReddit } from './reddit'
 import { scrapeRSS, scrapeGoogleCSE } from './rss'
+import { scrapeCTFtime, scrapeMLH, scrapeGitHub, scrapeDevfolio, scrapeUnstop } from './apis'
 import { isFlagged } from '../filter'
 import { supabaseAdmin } from '../supabase'
 import type { Opportunity } from '../types'
@@ -13,10 +14,15 @@ interface ScrapeOptions {
 }
 
 export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> {
-  const [hn, reddit, rss] = await Promise.all([
+  const [hn, reddit, rss, ctf, mlh, github, devfolio, unstop] = await Promise.all([
     scrapeHackerNews(),
     scrapeReddit(opts.redditClientId, opts.redditClientSecret),
     scrapeRSS(),
+    scrapeCTFtime(),
+    scrapeMLH(),
+    scrapeGitHub(),
+    scrapeDevfolio(),
+    scrapeUnstop(),
   ])
 
   let google: Opportunity[] = []
@@ -24,7 +30,7 @@ export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> 
     google = await scrapeGoogleCSE(opts.googleCseKey, opts.googleCseId)
   }
 
-  const all = [...hn, ...reddit, ...rss, ...google]
+  const all = [...hn, ...reddit, ...rss, ...ctf, ...mlh, ...github, ...devfolio, ...unstop, ...google]
   const clean = all.filter(o => !isFlagged(o))
 
   if (clean.length === 0) return 0

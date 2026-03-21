@@ -1,6 +1,6 @@
 import type { Opportunity } from '../types'
 
-const SUBREDDITS = 'hackathons+forhire+cscareerquestions+programming+devops'
+const SUBREDDITS = 'hackathons+forhire+cscareerquestions+programming+devops+freelance+startups+webdev+gamedev+datascience+MachineLearning+learnprogramming+entrepreneur+compsci+netsec'
 const REDDIT_BASE = 'https://www.reddit.com'
 
 interface RedditPost {
