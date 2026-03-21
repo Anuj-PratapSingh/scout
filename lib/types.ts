@@ -16,6 +16,7 @@ export interface Preferences {
   custom_criteria: string[]
   compulsory_criteria: string[]
   match_threshold: number
+  email_frequency: number  // 1–5 emails per day
 }
 
 export interface MatchResult {

@@ -198,3 +198,66 @@ h1, h2, h3, h4 { font-family: var(--font-head); color: var(--ink); }
 
 input[type=range]    { accent-color: var(--primary); }
 input[type=checkbox] { accent-color: var(--primary); }
+
+/* ── Live Counter (Clock Vibe) ── */
+.terminal-box {
+  background: #0d0f0c;
+  border: 2px solid #2d2f2c;
+  box-shadow: 4px 4px 0 #2d2f2c;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.terminal-grid-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(227,255,115,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(227,255,115,0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.clock-digit-box {
+  background: #1a1c18;
+  border: 1px solid #3a3c38;
+  border-radius: 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  position: relative;
+}
+.clock-digit-box::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.4);
+}
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(227,255,115,0.7), 0 0 30px rgba(227,255,115,0.3);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.82;
+    text-shadow: none;
+  }
+}
+@keyframes tick {
+  0%   { transform: translateY(0);   }
+  10%  { transform: translateY(-3px); }
+  20%  { transform: translateY(0);   }
+}
+.digital-stat {
+  font-family: 'Orbitron', monospace;
+  color: #E3FF73;
+  animation: flicker 5s infinite alternate;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.ticking {
+  animation: tick 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}

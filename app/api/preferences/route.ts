@@ -42,7 +42,7 @@ export async function PUT(req: Request) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const body = await req.json()
-  const { categories, custom_criteria, compulsory_criteria, match_threshold, keys } = body
+  const { categories, custom_criteria, compulsory_criteria, match_threshold, email_frequency, keys } = body
 
   // Ensure user row exists (magic link flow doesn't call POST /api/users)
   await supabaseAdmin.from('users').upsert(
@@ -58,6 +58,7 @@ export async function PUT(req: Request) {
       ...(custom_criteria !== undefined && { custom_criteria }),
       ...(compulsory_criteria !== undefined && { compulsory_criteria }),
       ...(match_threshold !== undefined && { match_threshold }),
+      ...(email_frequency !== undefined && { email_frequency }),
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' })
   }
@@ -65,7 +66,7 @@ export async function PUT(req: Request) {
   // Upsert BYOK keys (encrypt each)
   if (keys) {
     const encrypted: Record<string, string> = { user_id: user.id }
-    const keyFields = ['reddit_client_id', 'reddit_client_secret', 'google_cse_key', 'google_cse_id', 'resend_api_key', 'ai_api_key']
+    const keyFields = ['reddit_client_id', 'reddit_client_secret', 'google_cse_key', 'google_cse_id', 'resend_api_key', 'ai_api_key', 'gemini_api_key', 'together_api_key', 'openai_api_key', 'anthropic_api_key']
     for (const field of keyFields) {
       if (keys[field]) encrypted[field] = encryptKey(keys[field])
     }

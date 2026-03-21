@@ -17,8 +17,11 @@ import { scrapeHackerNews } from './hackernews'
 import { scrapeReddit } from './reddit'
 import { scrapeRSS, scrapeGoogleCSE } from './rss'
 import { scrapeCTFtime, scrapeMLH, scrapeGitHub, scrapeDevfolio, scrapeUnstop } from './apis'
-import { scrapeRemotiveAPI, scrapeHNJobs, scrapeInternshala, scrapeWellfound, scrapeHackerEarth, scrapeKaggle, scrapeEthGlobal, scrapeSwag } from './jobs'
-import { scrapeDevTo, scrapeHNTop } from './blogs'
+import { scrapeRemotiveAPI, scrapeHNJobs, scrapeInternshala, scrapeWellfound, scrapeHackerEarth, scrapeKaggle, scrapeEthGlobal, scrapeSwag, scrapeRemoteOK, scrapeArbeitnow, scrapeJobicy, scrapeTheMuse, scrapeYCJobs } from './jobs'
+import { scrapeDevTo, scrapeHNTop, scrapeHashnode } from './blogs'
+import { scrapeCodeforces, scrapeCodeChef, scrapeAtCoder, scrapeHackerEarthChallenges, scrapeTopCoder } from './contests'
+import { scrapeDoraHacks, scrapeIssueHunt, scrapeImmunefi, scrapeHackerOne, scrapeOpenBugBounty } from './bounties'
+import { scrapeStaticDB } from './static'
 import { isFlagged } from '../filter'
 import { supabaseAdmin } from '../supabase'
 import type { Opportunity } from '../types'
@@ -31,7 +34,7 @@ interface ScrapeOptions {
 }
 
 export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> {
-  const [hn, reddit, rss, ctf, mlh, github, devfolio, unstop, remotiveApi, hnJobs, internshala, wellfound, hackerearth, kaggle, ethglobal, swag, devto, hnTop] = await Promise.all([
+  const [hn, reddit, rss, ctf, mlh, github, devfolio, unstop, remotiveApi, hnJobs, internshala, wellfound, hackerearth, kaggle, ethglobal, swag, devto, hnTop, hashnode, remoteok, arbeitnow, jobicy, themuse, ycjobs, codeforces, codechef, atcoder, heChallenge, topcoder, dorahacks, issuehunt, immunefi, hackerone, openbugbounty] = await Promise.all([
     scrapeHackerNews(),
     scrapeReddit(opts.redditClientId, opts.redditClientSecret),
     scrapeRSS(),
@@ -50,6 +53,22 @@ export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> 
     scrapeSwag(),
     scrapeDevTo(),
     scrapeHNTop(),
+    scrapeHashnode(),
+    scrapeRemoteOK(),
+    scrapeArbeitnow(),
+    scrapeJobicy(),
+    scrapeTheMuse(),
+    scrapeYCJobs(),
+    scrapeCodeforces(),
+    scrapeCodeChef(),
+    scrapeAtCoder(),
+    scrapeHackerEarthChallenges(),
+    scrapeTopCoder(),
+    scrapeDoraHacks(),
+    scrapeIssueHunt(),
+    scrapeImmunefi(),
+    scrapeHackerOne(),
+    scrapeOpenBugBounty(),
   ])
 
   let google: Opportunity[] = []
@@ -57,7 +76,8 @@ export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> 
     google = await scrapeGoogleCSE(opts.googleCseKey, opts.googleCseId)
   }
 
-  const all = [...hn, ...reddit, ...rss, ...ctf, ...mlh, ...github, ...devfolio, ...unstop, ...remotiveApi, ...hnJobs, ...internshala, ...wellfound, ...hackerearth, ...kaggle, ...ethglobal, ...swag, ...devto, ...hnTop, ...google]
+  const staticOpps = scrapeStaticDB()
+  const all = [...hn, ...reddit, ...rss, ...ctf, ...mlh, ...github, ...devfolio, ...unstop, ...remotiveApi, ...hnJobs, ...internshala, ...wellfound, ...hackerearth, ...kaggle, ...ethglobal, ...swag, ...devto, ...hnTop, ...hashnode, ...remoteok, ...arbeitnow, ...jobicy, ...themuse, ...ycjobs, ...codeforces, ...codechef, ...atcoder, ...heChallenge, ...topcoder, ...dorahacks, ...issuehunt, ...immunefi, ...hackerone, ...openbugbounty, ...staticOpps, ...google]
   const clean = all.filter(o => !isFlagged(o))
 
   if (clean.length === 0) return 0

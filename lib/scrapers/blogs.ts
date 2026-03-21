@@ -141,3 +141,40 @@ export async function scrapeHNTop(): Promise<Opportunity[]> {
 
   return results
 }
+
+
+// ─── Hashnode — dev blog platform (GraphQL API, free) ────────────────────────
+export async function scrapeHashnode(): Promise<import('../types').Opportunity[]> {
+  try {
+    const query = `{
+      feed(type: BEST, page: 0) {
+        post { title brief slug publication { domain displayTitle } reactionCount }
+      }
+    }`
+    const res = await fetch('https://api.hashnode.com/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'Scout/1.0' },
+      body: JSON.stringify({ query }),
+      signal: AbortSignal.timeout(8000),
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    const posts = data?.data?.feed ?? []
+    return posts.filter((p: { post?: { title?: string } }) => p.post?.title).map((p: { post: { title: string; brief?: string; slug: string; publication?: { domain?: string }; reactionCount?: number } }) => {
+      const post = p.post
+      const domain = post.publication?.domain ?? 'hashnode.dev'
+      const url = `https://${domain}/${post.slug}`
+      const reactions = post.reactionCount ?? 0
+      const qualityTag = reactions >= 500 ? 'legendary' : reactions >= 100 ? 'trending' : 'community-pick'
+      return {
+        title: post.title,
+        description: post.brief?.slice(0, 500) ?? '',
+        url,
+        source: 'hashnode',
+        tags: [qualityTag, 'blog', 'webdev'],
+      }
+    })
+  } catch {
+    return []
+  }
+}

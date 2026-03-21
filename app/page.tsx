@@ -2,15 +2,89 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
+// ─── Live counter component ────────────────────────────────────────────────────
+function useCountUp(target: number, duration = 1800) {
+  const [val, setVal] = useState(0)
+  const started = useRef(false)
+  useEffect(() => {
+    if (target === 0 || started.current) return
+    started.current = true
+    const start = performance.now()
+    const step = (now: number) => {
+      const t = Math.min((now - start) / duration, 1)
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - t, 3)
+      setVal(Math.floor(eased * target))
+      if (t < 1) requestAnimationFrame(step)
+      else setVal(target)
+    }
+    requestAnimationFrame(step)
+  }, [target, duration])
+  return val
+}
+
+function DigitDisplay({ value, delay = 0 }: { value: number; label: string; delay?: number }) {
+  const formatted = value.toLocaleString()
+  return (
+    <span className="clock-digit-box ticking" style={{ animationDelay: `${delay}s` }}>
+      <span className="digital-stat" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
+        {formatted}
+      </span>
+    </span>
+  )
+}
+
+function LiveCounter() {
+  const [stats, setStats] = useState({ opps: 0, users: 0, sources: 0 })
+  useEffect(() => {
+    fetch('/api/stats').then(r => r.json()).then(setStats).catch(() => {})
+  }, [])
+  const opps    = useCountUp(stats.opps)
+  const users   = useCountUp(stats.users)
+  const sources = useCountUp(stats.sources)
+  return (
+    <div className="terminal-box" style={{ margin: '2.5rem 0', padding: 'clamp(1.25rem, 4vw, 2rem) clamp(1.5rem, 5vw, 2.5rem)' }}>
+      <div className="terminal-grid-bg" />
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', gap: 'clamp(1.5rem, 5vw, 3rem)', alignItems: 'center' }}>
+        {/* Active Scouts */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <DigitDisplay value={users} label="Active Scouts" delay={0} />
+          <span style={{ fontFamily: 'var(--font-head)', fontStyle: 'italic', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#6b6e67', fontWeight: 700 }}>
+            Active Scouts
+          </span>
+        </div>
+        <div style={{ width: 1, height: 56, background: '#2d2f2c', flexShrink: 0 }} />
+        {/* Sources */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <DigitDisplay value={sources} label="Intelligence Sources" delay={0.2} />
+          <span style={{ fontFamily: 'var(--font-head)', fontStyle: 'italic', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#6b6e67', fontWeight: 700 }}>
+            Intelligence Sources
+          </span>
+        </div>
+        <div style={{ width: 1, height: 56, background: '#2d2f2c', flexShrink: 0 }} />
+        {/* Open Opps */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <DigitDisplay value={opps} label="Open Opportunities" delay={0.4} />
+          <span style={{ fontFamily: 'var(--font-head)', fontStyle: 'italic', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#6b6e67', fontWeight: 700 }}>
+            Open Opportunities
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Opp {
   id: string; title: string; description: string; url: string
   source: string; tags: string[]; deadline?: string | null; fetched_at: string
 }
-type Kind = 'events' | 'jobs' | 'blogs' | 'repos' | 'swag'
+type Kind = 'events' | 'jobs' | 'blogs' | 'repos' | 'swag' | 'projects'
 
 // ─── Source metadata ──────────────────────────────────────────────────────────
 const SOURCE_LABEL: Record<string, string> = {
+  'radar-projects': 'Radar', 'radar-swag': 'Radar', 'radar-jobs': 'Radar',
+  hashnode: 'Hashnode', 'papers-with-code': 'PwC',
   hackernews: 'HN', reddit: 'Reddit', devpost: 'Devpost', devto: 'Dev.to',
   remotive: 'Remotive', weworkremotely: 'WWR', github: 'GitHub',
   'github-blog': 'GitHub Blog',
@@ -20,6 +94,14 @@ const SOURCE_LABEL: Record<string, string> = {
   'eu-grants': 'EU Grants', 'hn-jobs': 'HN Jobs', internshala: 'Internshala',
   wellfound: 'Wellfound', hackerearth: 'HackerEarth', kaggle: 'Kaggle',
   ethglobal: 'ETHGlobal', swag: 'Swag',
+  remoteok: 'RemoteOK', arbeitnow: 'Arbeitnow', jobicy: 'Jobicy',
+  themuse: 'The Muse', 'yc-jobs': 'YC Jobs', 'yc-blog': 'YC Blog',
+  codeforces: 'Codeforces', codechef: 'CodeChef', atcoder: 'AtCoder',
+  topcoder: 'TopCoder', 'hackerearth-challenge': 'HE Challenge',
+  dorahacks: 'DoraHacks', issuehunt: 'IssueHunt', immunefi: 'Immunefi',
+  hackerone: 'HackerOne', openbugbounty: 'OpenBugBounty',
+  smashing: 'Smashing', yourstory: 'YourStory', inc42: 'Inc42',
+  'remote-co': 'Remote.co', 'authentic-jobs': 'Authentic Jobs',
 }
 
 // Source color pairs [background, text]
@@ -44,6 +126,31 @@ const SOURCE_COLOR: Record<string, [string, string]> = {
   ethglobal: ['#2d2f2c', '#f7f7f2'],
   swag: ['#b35000', '#fde5c8'],
   reddit: ['#b35000', '#fde5c8'],
+  remoteok: ['#00684f', '#98ffd9'],
+  arbeitnow: ['#00684f', '#98ffd9'],
+  jobicy: ['#00684f', '#98ffd9'],
+  themuse: ['#63547e', '#dfccfe'],
+  'yc-jobs': ['#b35000', '#fde5c8'],
+  'yc-blog': ['#b35000', '#fde5c8'],
+  codeforces: ['#2d2f2c', '#f7f7f2'],
+  codechef: ['#b35000', '#fde5c8'],
+  atcoder: ['#2d2f2c', '#f7f7f2'],
+  topcoder: ['#526200', '#dcf76c'],
+  dorahacks: ['#63547e', '#dfccfe'],
+  issuehunt: ['#526200', '#dcf76c'],
+  immunefi: ['#2d2f2c', '#f7f7f2'],
+  hackerone: ['#2d2f2c', '#f7f7f2'],
+  openbugbounty: ['#b35000', '#fde5c8'],
+  smashing: ['#b35000', '#fde5c8'],
+  yourstory: ['#00684f', '#98ffd9'],
+  inc42: ['#526200', '#dcf76c'],
+  'remote-co': ['#00684f', '#98ffd9'],
+  'authentic-jobs': ['#63547e', '#dfccfe'],
+  'radar-projects': ['#526200', '#dcf76c'],
+  'radar-swag': ['#b35000', '#fde5c8'],
+  'radar-jobs': ['#00684f', '#98ffd9'],
+  hashnode: ['#2d2f2c', '#f7f7f2'],
+  'papers-with-code': ['#63547e', '#dfccfe'],
 }
 function srcColor(source: string): [string, string] {
   return SOURCE_COLOR[source] ?? ['#526200', '#dcf76c']
@@ -53,18 +160,31 @@ function srcColor(source: string): [string, string] {
 const SOURCE_KIND: Record<string, Kind> = {
   devpost: 'events', mlh: 'events', devfolio: 'events', unstop: 'events',
   ctftime: 'events', hackerearth: 'events', kaggle: 'events', ethglobal: 'events',
+  dorahacks: 'events',
+  codeforces: 'events', codechef: 'events', atcoder: 'events',
+  topcoder: 'events', 'hackerearth-challenge': 'events',
   remotive: 'jobs', weworkremotely: 'jobs', 'hn-jobs': 'jobs',
   internshala: 'jobs', wellfound: 'jobs',
+  remoteok: 'jobs', arbeitnow: 'jobs', jobicy: 'jobs', themuse: 'jobs',
+  'yc-jobs': 'jobs', 'remote-co': 'jobs', 'authentic-jobs': 'jobs',
   devto: 'blogs', indiehackers: 'blogs', 'google-developers': 'blogs',
   'aws-opensource': 'blogs', 'eu-grants': 'blogs', 'github-blog': 'blogs',
-  hackernews: 'blogs',
+  hackernews: 'blogs', smashing: 'blogs', yourstory: 'blogs',
+  inc42: 'blogs', 'yc-blog': 'blogs',
   github: 'repos',
   swag: 'swag',
+  issuehunt: 'swag', immunefi: 'swag', hackerone: 'swag', openbugbounty: 'swag',
+  'radar-projects': 'projects',
+  'radar-jobs': 'jobs',
+  'radar-swag': 'swag',
+  hashnode: 'blogs',
+  'papers-with-code': 'projects',
 }
 
 function getKind(opp: Opp): Kind {
   if (SOURCE_KIND[opp.source]) return SOURCE_KIND[opp.source]
   const tags = (opp.tags ?? []).join(' ').toLowerCase()
+  if (['project-idea'].some(k => tags.includes(k))) return 'projects'
   if (['swag', 'free', 'giveaway', 'student-pack'].some(k => tags.includes(k))) return 'swag'
   if (['job', 'hiring', 'internship', 'salary', 'remote'].some(k => tags.includes(k))) return 'jobs'
   if (['hackathon', 'contest', 'competition', 'bounty', 'grant', 'fellowship'].some(k => tags.includes(k))) return 'events'
@@ -97,6 +217,18 @@ const REPO_CHIPS = [
   { key: 'project-guide', label: '📚 Guides' },
   { key: 'cool-project', label: '✨ Cool' },
 ]
+const PROJECT_CHIPS = [
+  { key: 'all', label: 'All' },
+  { key: 'ai-ml', label: '🤖 AI / ML' },
+  { key: 'web-dev', label: '🌐 Web Dev' },
+  { key: 'mobile', label: '📱 Mobile' },
+  { key: 'data-science', label: '📊 Data Science' },
+  { key: 'cybersecurity', label: '🔐 Security' },
+  { key: 'devops', label: '⚙️ DevOps' },
+  { key: 'blockchain', label: '🔗 Blockchain' },
+  { key: 'beginner', label: '🌱 Beginner' },
+  { key: 'advanced', label: '🚀 Advanced' },
+]
 const BLOG_CHIPS = [
   { key: 'all', label: 'All' },
   { key: 'trending', label: '🔥 Trending' },
@@ -109,8 +241,9 @@ const TABS: { key: Kind | 'all'; label: string }[] = [
   { key: 'all', label: 'All' },
   { key: 'events', label: '🏆 Events' },
   { key: 'jobs', label: '💼 Jobs' },
+  { key: 'projects', label: '💡 Build Ideas' },
   { key: 'swag', label: '🎁 Swag' },
-  { key: 'repos', label: '🛠 Projects' },
+  { key: 'repos', label: '🛠 Repos' },
   { key: 'blogs', label: '📝 Blogs' },
 ]
 
@@ -208,6 +341,30 @@ function OppModal({ opp, onClose }: { opp: Opp; onClose: () => void }) {
 }
 
 // ─── Opp card ─────────────────────────────────────────────────────────────────
+function SourceIcon({ source, url, bg, text, initial }: { source: string; url: string; bg: string; text: string; initial: string }) {
+  const [logoFailed, setLogoFailed] = useState(false)
+  let domain = ''
+  try { domain = new URL(url).hostname } catch { /* ignore */ }
+  const logoUrl = domain && !logoFailed ? `https://logo.clearbit.com/${domain}` : null
+
+  return (
+    <div style={{
+      width: 34, height: 34, borderRadius: '8px',
+      background: bg, color: text,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontWeight: 800, fontSize: '0.85rem', fontFamily: 'var(--font-body)',
+      border: 'var(--border)', flexShrink: 0, overflow: 'hidden',
+    }}>
+      {logoUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={logoUrl} alt={source} width={28} height={28}
+          style={{ objectFit: 'contain', borderRadius: 4 }}
+          onError={() => setLogoFailed(true)} />
+      ) : initial}
+    </div>
+  )
+}
+
 function OppCard({ opp, onClick, index }: { opp: Opp; onClick: () => void; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
@@ -226,7 +383,7 @@ function OppCard({ opp, onClick, index }: { opp: Opp; onClick: () => void; index
 
   // Display tags — exclude internal category tags
   const displayTags = (opp.tags ?? [])
-    .filter(t => !['trending','legendary','beginner-friendly','project-guide','cool-project','community-pick'].includes(t))
+    .filter(t => !['trending','legendary','beginner-friendly','project-guide','cool-project','community-pick','project-idea','free','student','job','remote','onsite','full-time','internship'].includes(t))
     .slice(0, 3)
 
   // Category quality badges
@@ -248,14 +405,8 @@ function OppCard({ opp, onClick, index }: { opp: Opp; onClick: () => void; index
       {/* Header row: source icon + badge */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Source initial circle */}
-          <div style={{
-            width: 34, height: 34, borderRadius: '8px',
-            background: bg, color: text,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontWeight: 800, fontSize: '0.85rem', fontFamily: 'var(--font-body)',
-            border: 'var(--border)', flexShrink: 0,
-          }}>{initial}</div>
+          {/* Source initial circle with clearbit logo fallback */}
+          <SourceIcon source={opp.source} url={opp.url} bg={bg} text={text} initial={initial} />
           <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', fontWeight: 600, color: 'var(--ink-mid)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             {label}
           </span>
@@ -335,6 +486,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Kind | 'all'>('all')
   const [repoChip, setRepoChip] = useState('all')
   const [blogChip, setBlogChip] = useState('all')
+  const [projectChip, setProjectChip] = useState('all')
   const [showTutorial, setShowTutorial] = useState(false)
 
   useEffect(() => {
@@ -345,19 +497,22 @@ export default function Home() {
   }, [])
 
   const categorized = {
-    events: opps.filter(o => getKind(o) === 'events'),
-    jobs:   opps.filter(o => getKind(o) === 'jobs'),
-    blogs:  opps.filter(o => getKind(o) === 'blogs'),
-    repos:  opps.filter(o => getKind(o) === 'repos'),
-    swag:   opps.filter(o => getKind(o) === 'swag'),
-  }
+    events:   opps.filter(o => getKind(o) === 'events'),
+    jobs:     opps.filter(o => getKind(o) === 'jobs'),
+    blogs:    opps.filter(o => getKind(o) === 'blogs'),
+    repos:    opps.filter(o => getKind(o) === 'repos'),
+    swag:     opps.filter(o => getKind(o) === 'swag'),
+    projects: opps.filter(o => getKind(o) === 'projects'),
+  } as Record<Kind, Opp[]>
 
-  const baseFiltered = activeTab === 'all' ? opps : categorized[activeTab as Kind]
+  const baseFiltered = activeTab === 'all' ? opps : (categorized[activeTab as Kind] ?? [])
   const filtered = (() => {
     if (activeTab === 'repos' && repoChip !== 'all')
-      return baseFiltered.filter(o => (o.tags ?? []).includes(repoChip))
+      return baseFiltered.filter((o: Opp) => (o.tags ?? []).includes(repoChip))
     if (activeTab === 'blogs' && blogChip !== 'all')
-      return baseFiltered.filter(o => (o.tags ?? []).includes(blogChip))
+      return baseFiltered.filter((o: Opp) => (o.tags ?? []).includes(blogChip))
+    if (activeTab === 'projects' && projectChip !== 'all')
+      return baseFiltered.filter((o: Opp) => (o.tags ?? []).includes(projectChip))
     return baseFiltered
   })()
 
@@ -409,10 +564,13 @@ export default function Home() {
           or bounty again.
         </h1>
 
-        <p style={{ color: 'var(--ink-mid)', fontSize: '1.1rem', lineHeight: 1.7, maxWidth: '560px', marginBottom: '2.25rem' }}>
-          Scout monitors 20+ sources — Devpost, MLH, HackerNews, GitHub, Remotive, CTFtime and more —
+        <p style={{ color: 'var(--ink-mid)', fontSize: '1.1rem', lineHeight: 1.7, maxWidth: '560px', marginBottom: '0' }}>
+          Scout monitors 50+ sources — Devpost, MLH, HackerNews, GitHub, Remotive, Codeforces, DoraHacks and more —
           and notifies you the moment something matches your criteria.
         </p>
+
+        {/* ── Live clock counter ── */}
+        <LiveCounter />
 
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <Link href="/signup" className="btn btn-primary" style={{ fontSize: '1rem', padding: '0.65rem 1.75rem', borderRadius: 'var(--radius)', fontWeight: 700 }}>
@@ -427,15 +585,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Stats strip ── */}
+      {/* ── Quick stats strip (category counts) ── */}
       <div style={{ borderTop: 'var(--border)', borderBottom: 'var(--border)', background: 'var(--surface-low)' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1.1rem 1.5rem', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '0.75rem' }}>
           {[
-            { n: '20+', label: 'Sources' },
-            { n: '3×', label: 'Daily scrapes' },
-            { n: loading ? '—' : opps.length, label: 'Live opps' },
             { n: loading ? '—' : categorized.events.length, label: 'Events' },
             { n: loading ? '—' : categorized.jobs.length, label: 'Jobs' },
+            { n: loading ? '—' : categorized.projects.length, label: 'Build Ideas' },
+            { n: loading ? '—' : categorized.swag.length, label: 'Swag' },
+            { n: loading ? '—' : categorized.repos.length, label: 'Repos' },
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--font-head)', fontStyle: 'italic', fontWeight: 800, fontSize: '1.7rem', color: 'var(--ink)' }}>{s.n}</div>
@@ -477,7 +635,7 @@ export default function Home() {
             const active = activeTab === tab.key
             return (
               <button key={tab.key}
-                onClick={() => { setActiveTab(tab.key); setRepoChip('all'); setBlogChip('all') }}
+                onClick={() => { setActiveTab(tab.key); setRepoChip('all'); setBlogChip('all'); setProjectChip('all') }}
                 style={{
                   fontFamily: 'var(--font-body)', fontWeight: 600,
                   fontSize: '0.82rem', padding: '0.45rem 1.1rem',
@@ -498,6 +656,11 @@ export default function Home() {
         {/* Sub-chips for repos */}
         {activeTab === 'repos' && !loading && (
           <ChipRow chips={REPO_CHIPS} active={repoChip} onChange={setRepoChip} />
+        )}
+
+        {/* Sub-chips for build ideas */}
+        {activeTab === 'projects' && !loading && (
+          <ChipRow chips={PROJECT_CHIPS} active={projectChip} onChange={setProjectChip} />
         )}
 
         {/* Sub-chips for blogs */}
@@ -578,7 +741,7 @@ export default function Home() {
       <footer style={{ borderTop: 'var(--border)', background: 'var(--surface)', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'var(--font-head)', fontStyle: 'italic', fontWeight: 700, fontSize: '1rem', color: 'var(--ink)' }}>Scout</span>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
-          {[['Preferences', '/preferences'], ['Sign in', '/signup']].map(([l, h]) => (
+          {[['Dashboard', '/dashboard'], ['Preferences', '/preferences'], ['Sign in', '/signup']].map(([l, h]) => (
             <Link key={l} href={h} style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink-faint)', textDecoration: 'none' }}>
               {l}
             </Link>

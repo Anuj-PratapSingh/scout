@@ -1,0 +1,2923 @@
+{
+  "projects": [
+    {
+      "title": "ChatGPT Clone",
+      "description": "Python, OpenAI API, Streamlit. Build a full-featured chatbot with memory, persona switching, and export history.. API integration, prompt engineering, UI with Streamlit",
+      "url": "https://github.com/topics/chatgpt-clone",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "YouTube Video Summarizer",
+      "description": "Python, LangChain, OpenAI / Gemini. Paste a YouTube URL → get structured notes + timestamp highlights.. LLM chaining, YouTube transcript API, summarization",
+      "url": "https://python.langchain.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "beginner"
+      ]
+    },
+    {
+      "title": "AI Resume Screener",
+      "description": "Python, spaCy, FastAPI. Upload JD + resumes → rank candidates by fit score with explanation.. NLP, entity extraction, scoring logic",
+      "url": "https://spacy.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Real-time Emotion Detector",
+      "description": "Python, OpenCV, DeepFace / FER. Webcam feed → detect emotions in real time with confidence scores.. Computer Vision, CNN models, live video streams",
+      "url": "https://github.com/serengil/deepface",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Plant Disease Classifier",
+      "description": "Python, TensorFlow, Streamlit. Upload leaf image → identify disease with treatment advice. Useful for farmers.. Image classification, transfer learning, real-world impact",
+      "url": "https://paperswithcode.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "AI Code Review Bot",
+      "description": "Python, GitHub API, OpenAI. GitHub Action that reviews PRs and comments inline suggestions.. GitHub Actions, LLMs, DevOps integration",
+      "url": "https://docs.github.com/en/rest",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Fake News Detector",
+      "description": "Python, scikit-learn, BERT. Paste news article → probability it's fake + key misleading phrases highlighted.. NLP, binary classification, BERT fine-tuning",
+      "url": "https://huggingface.co/models",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Personal Finance Advisor AI",
+      "description": "Python, LangChain, Streamlit, Plaid. Connect bank account → AI analyzes spending, gives saving tips.. RAG, financial APIs, conversational AI",
+      "url": "https://langchain.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Voice-to-SQL Query Engine",
+      "description": "Python, Whisper, SQLite, LangChain. Speak a question → auto-generate SQL → show result from database.. Speech recognition, text-to-SQL, LLM agents",
+      "url": "https://openai.com/research/whisper",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "AI Tutor for Any Subject",
+      "description": "Python, OpenAI, Streamlit. Student uploads syllabus PDF → AI generates flashcards, quizzes, explanations.. PDF parsing, RAG, adaptive learning",
+      "url": "https://openai.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Stock Price Predictor",
+      "description": "Python, LSTM, yfinance, Plotly. Predict next-day closing price using LSTM with 5yr historical data.. Time series, LSTM, financial data",
+      "url": "https://keras.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Sign Language Translator",
+      "description": "Python, MediaPipe, TensorFlow. Real-time webcam hand gesture → translated text/speech output.. Pose estimation, classification, accessibility",
+      "url": "https://mediapipe.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Plagiarism Checker",
+      "description": "Python, NLTK, cosine similarity. Upload two documents → similarity score + highlighted matched sections.. TF-IDF, cosine similarity, text preprocessing",
+      "url": "https://nltk.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "beginner"
+      ]
+    },
+    {
+      "title": "AI Study Plan Generator",
+      "description": "Python, OpenAI, Notion API. Input exam date + topics → daily study schedule pushed to Notion.. API chaining, calendar logic, LLM output parsing",
+      "url": "https://developers.notion.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Object Detection App",
+      "description": "Python, YOLOv8, Streamlit. Upload image/video → detect + label all objects with bounding boxes.. YOLO models, computer vision, real-time inference",
+      "url": "https://docs.ultralytics.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Full-stack Job Board",
+      "description": "Next.js, Prisma, PostgreSQL, TailwindCSS. Build a job listing site with auth, role-based posting, filtering, and search.. Full-stack, auth, DB relations, deployment",
+      "url": "https://nextjs.org/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Real-time Chat App",
+      "description": "React, Firebase / Socket.io, CSS. Group + DM chat with read receipts, online status, image sharing.. WebSockets, Firebase Realtime DB, state management",
+      "url": "https://socket.io/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Developer Portfolio Builder",
+      "description": "React or Next.js, TailwindCSS. Drag-and-drop portfolio builder that generates a shareable link.. Component architecture, localStorage, routing",
+      "url": "https://tailwindcss.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "E-commerce Store",
+      "description": "Next.js, Stripe, Prisma, Vercel. Full product listing, cart, checkout with Stripe payments + order tracking.. Payments, server-side rendering, DB",
+      "url": "https://stripe.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Collaborative Whiteboard",
+      "description": "React, Canvas API, Socket.io. Real-time multi-user drawing board (Excalidraw-lite clone).. WebSockets, Canvas, CRDT-style state sync",
+      "url": "https://developer.mozilla.org/canvas",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Blog CMS Platform",
+      "description": "Next.js, MDX, Prisma, TailwindCSS. Write posts in Markdown, publish, manage drafts, add comments, SEO meta.. SSG, MDX, CMS architecture, SEO",
+      "url": "https://nextjs.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "URL Shortener with Analytics",
+      "description": "Node.js, Express, MongoDB, Chart.js. Short links + click tracking dashboard with geo, device, referrer data.. REST APIs, MongoDB, analytics, charts",
+      "url": "https://expressjs.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Expense Tracker PWA",
+      "description": "React, IndexedDB, TailwindCSS. Offline-first budget app with charts, categories, CSV export.. PWA, IndexedDB, Chart.js, responsive design",
+      "url": "https://web.dev/progressive-web-apps",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "GitHub Profile Analyzer",
+      "description": "React, GitHub API, Recharts. Enter username → visual breakdown of languages, top repos, contribution graph.. REST API integration, data viz, state",
+      "url": "https://docs.github.com/en/rest",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Recipe Finder with Pantry",
+      "description": "React, Spoonacular API, TailwindCSS. Input ingredients you have → suggestions + step-by-step recipe with macros.. Third-party API, filtering, UI components",
+      "url": "https://spoonacular.com/food-api",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "SaaS Waitlist Landing Page",
+      "description": "HTML/CSS, JS, Supabase / Resend. Animated landing page + email capture → confirmation email auto-sent.. Email marketing, Supabase DB, animations",
+      "url": "https://supabase.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Dev Tools Dashboard",
+      "description": "Next.js, ShadCN, various APIs. All-in-one: color picker, regex tester, JSON formatter, base64 encode/decode.. Tool building, state, copy/paste UX",
+      "url": "https://ui.shadcn.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Social Media Scheduler",
+      "description": "Next.js, Twitter API, Supabase, cron. Schedule tweets/posts, preview drafts, see best posting times per account.. OAuth, cron jobs, social APIs",
+      "url": "https://developer.twitter.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Realtime Poll / Quiz App",
+      "description": "React, Socket.io, Node.js. Host live polls/quizzes, attendees vote in real-time, results animate live.. WebSockets, live state, rooms",
+      "url": "https://socket.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Multi-tenant SaaS Starter",
+      "description": "Next.js, Prisma, Clerk, Stripe. Boilerplate with orgs, user roles, subscription billing, usage limits.. Auth, multi-tenancy, billing architecture",
+      "url": "https://clerk.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Habit Tracker App",
+      "description": "React Native / Flutter. Daily habit streaks, reminders, progress heatmap (GitHub-style).. Mobile UI, AsyncStorage, push notifications",
+      "url": "https://reactnative.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Food Delivery Clone",
+      "description": "Flutter, Firebase, Google Maps. Browse restaurants, order, live map tracking, payment integration.. Maps, real-time DB, mobile payments",
+      "url": "https://flutter.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Language Learning App",
+      "description": "Flutter / React Native, SQLite. Duolingo-lite: vocab flashcards, spaced repetition, streaks, XP system.. Spaced repetition algorithm, local DB, gamification",
+      "url": "https://flutter.dev/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Fitness Tracker",
+      "description": "React Native, HealthKit / Google Fit. Log workouts, track calories, view progress charts, export PDF report.. Native health APIs, charting, motion sensors",
+      "url": "https://reactnative.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "AR Product Visualizer",
+      "description": "React Native, ARKit / ARCore. Point camera at room → place 3D furniture/products in real space.. Augmented reality, 3D models, camera access",
+      "url": "https://docs.expo.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Split Bills App",
+      "description": "Flutter, Firebase Auth. Add friends, split bills, track who owes what, settle via UPI QR.. State management, auth, simple finance logic",
+      "url": "https://flutter.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Bus / Metro Tracker",
+      "description": "React Native, Google Maps, GTFS API. Real-time bus ETA, route map, fare estimation, save favorite routes.. Location services, public transit APIs, maps",
+      "url": "https://developers.google.com/maps",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Mood Journal App",
+      "description": "Flutter, SQLite, chart_flutter. Log daily mood + notes, see mood trends, set reminders, export CSV.. Local storage, charting, notifications",
+      "url": "https://pub.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Offline Dictionary App",
+      "description": "React Native, SQLite, Free Dictionary API. Word lookup with definitions, examples, pronunciation audio, favorites list.. Offline-first, SQLite, audio playback",
+      "url": "https://dictionaryapi.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Campus Navigation App",
+      "description": "Flutter, Google Maps, custom tiles. Indoor map of campus, search rooms/labs, shortest path between buildings.. Custom map tiles, path algorithms, indoor nav",
+      "url": "https://flutter.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "mobile",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "COVID-19 Dashboard",
+      "description": "Python, Pandas, Plotly, Streamlit. Interactive world map + charts for cases, deaths, vaccinations by country.. Data wrangling, geospatial viz, Plotly Dash",
+      "url": "https://streamlit.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Movie Recommendation System",
+      "description": "Python, scikit-learn, Flask. Collaborative filtering + content-based hybrid recommender with a web UI.. ML algorithms, sparse matrices, recommendation engines",
+      "url": "https://scikit-learn.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Twitter Sentiment Analyzer",
+      "description": "Python, Tweepy, NLTK/VADER, Streamlit. Real-time tweet scraping by hashtag → sentiment breakdown + word cloud.. Twitter API, NLP sentiment, real-time processing",
+      "url": "https://docs.tweepy.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "IPL / Cricket Analytics",
+      "description": "Python, Pandas, Seaborn, Kaggle data. Deep analysis of match data: win factors, player performance, venue stats.. EDA, visualization, sports analytics",
+      "url": "https://kaggle.com/datasets",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "beginner"
+      ]
+    },
+    {
+      "title": "E-commerce Sales Dashboard",
+      "description": "Python, Power BI / Tableau, SQL. Business intelligence dashboard: revenue by region, product trends, funnel.. SQL joins, BI tools, business metrics",
+      "url": "https://powerbi.microsoft.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Customer Churn Predictor",
+      "description": "Python, XGBoost, SHAP, Streamlit. Predict telecom/bank customer churn + explain which features drive it.. Classification, SHAP explainability, feature engineering",
+      "url": "https://shap.readthedocs.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Airbnb Price Predictor",
+      "description": "Python, scikit-learn, Folium. Predict listing price based on location, amenities, room type. Show on map.. Regression, geospatial features, feature selection",
+      "url": "https://scikit-learn.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Real Estate Market EDA",
+      "description": "Python, Pandas, Matplotlib. Analyze housing dataset: price vs area, locality heatmap, YoY trends.. Exploratory data analysis, correlation, outlier detection",
+      "url": "https://kaggle.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Fraud Detection System",
+      "description": "Python, imbalanced-learn, XGBoost. Credit card fraud detection with class imbalance handling, ROC analysis.. Anomaly detection, SMOTE, model evaluation",
+      "url": "https://imbalanced-learn.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Stock Portfolio Optimizer",
+      "description": "Python, cvxpy, yfinance, Plotly. Markowitz portfolio optimization with efficient frontier visualization.. Optimization, portfolio theory, financial data",
+      "url": "https://cvxpy.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Password Strength Analyzer",
+      "description": "Python, zxcvbn, Flask. Check password entropy, crack time estimate, suggest stronger alternatives.. Entropy calculation, security basics, API design",
+      "url": "https://github.com/dropbox/zxcvbn",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "cybersecurity",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Network Port Scanner",
+      "description": "Python, Scapy / socket, threading. Scan IP range for open ports, detect OS fingerprint, export CSV report.. Networking, concurrency, socket programming",
+      "url": "https://scapy.net",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "cybersecurity",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Phishing URL Detector",
+      "description": "Python, scikit-learn, VirusTotal API. ML model + VirusTotal API to flag suspicious URLs with confidence score.. Feature extraction, URL parsing, classification",
+      "url": "https://virustotal.com/api",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "cybersecurity",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "File Encryption Tool",
+      "description": "Python, cryptography library. Drag-and-drop GUI to AES-256 encrypt/decrypt files with a passphrase.. Symmetric encryption, key derivation, GUI",
+      "url": "https://cryptography.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "cybersecurity",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Log Analyzer for Intrusion",
+      "description": "Python, ELK Stack / Splunk Free. Parse server logs, detect anomalies (too many 404s, brute-force patterns).. Log parsing, regex, anomaly detection",
+      "url": "https://elastic.co/elk-stack",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "cybersecurity",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Contribute to VSCode",
+      "description": "TypeScript, Node.js. Fix good-first-issue bugs in Microsoft's VSCode editor. Huge visibility.. TypeScript, OSS workflow, Git, code review",
+      "url": "https://github.com/microsoft/vscode",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "open-source",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Contribute to freeCodeCamp",
+      "description": "JavaScript, React. Add/fix curriculum challenges, improve docs. 400k+ stars.. OSS process, curriculum design, community",
+      "url": "https://github.com/freeCodeCamp",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "open-source",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Contribute to Pandas",
+      "description": "Python, C. Fix bugs or add features to the world's most-used data library.. Python internals, C extensions, testing",
+      "url": "https://github.com/pandas-dev/pandas",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "open-source",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Build a VS Code Extension",
+      "description": "TypeScript, VS Code API. Create a productivity extension: snippet manager, theme, Git helper.. Extension APIs, publishing to marketplace",
+      "url": "https://code.visualstudio.com/api",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "open-source",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Contribute to Hugging Face",
+      "description": "Python, PyTorch. Add model cards, fix tokenizer bugs, improve training scripts.. Transformers, ML model hosting, documentation",
+      "url": "https://github.com/huggingface",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "open-source",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Simple NFT Marketplace",
+      "description": "Solidity, React, Ethers.js, IPFS. Mint, list, and buy NFTs on testnet with IPFS image storage.. Smart contracts, IPFS, Web3 wallet integration",
+      "url": "https://docs.openzeppelin.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "blockchain",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Decentralized Voting DApp",
+      "description": "Solidity, Hardhat, React. Transparent on-chain voting: create proposals, vote, view results.. Solidity, Hardhat testing, ethers.js",
+      "url": "https://hardhat.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "blockchain",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Token-gated Discord Bot",
+      "description": "Node.js, Discord.js, Ethers.js. Verify wallet holds token → auto-assign Discord role.. Discord API, wallet auth, ERC-20 checks",
+      "url": "https://discord.js.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "blockchain",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Smart Home Dashboard",
+      "description": "Python, Raspberry Pi, MQTT, React. Monitor temp/humidity/motion sensors from a web dashboard. Control relay.. IoT protocols, MQTT, sensor integration, edge computing",
+      "url": "https://raspberrypi.com/documentation",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "iot-hardware",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Plant Watering Bot",
+      "description": "Arduino, C++, soil moisture sensor. Auto-water plants when soil is dry. Send Telegram alert when watered.. Arduino, sensors, Telegram Bot API",
+      "url": "https://arduino.cc/en/Guide",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "iot-hardware",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Face-recognition Door Lock",
+      "description": "Python, Raspberry Pi, OpenCV. Raspberry Pi camera → recognize face → unlock servo motor.. OpenCV, face recognition, hardware control",
+      "url": "https://pyimagesearch.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "iot-hardware",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Air Quality Monitor",
+      "description": "Arduino / ESP32, MQ sensors, OLED. Measure CO2, PM2.5, VOC levels. Display on OLED, log to cloud.. Sensor calibration, I2C display, cloud logging",
+      "url": "https://randomnerdtutorials.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "iot-hardware",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "CI/CD Pipeline from Scratch",
+      "description": "GitHub Actions, Docker, AWS/GCP free. Full pipeline: lint → test → build Docker image → push to registry → deploy.. CI/CD, Docker, cloud deployment, YAML",
+      "url": "https://docs.github.com/actions",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Infrastructure as Code Demo",
+      "description": "Terraform, AWS Free Tier. Provision VPC, EC2, RDS, S3 with Terraform modules. Destroy to save cost.. Terraform, cloud infra, IaC best practices",
+      "url": "https://developer.hashicorp.com/terraform",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Kubernetes Local Cluster",
+      "description": "k3s / minikube, kubectl, Helm. Deploy a multi-service app (frontend + backend + DB) on local k8s cluster.. Kubernetes, pods, services, Helm charts",
+      "url": "https://kubernetes.io/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Log Aggregation System",
+      "description": "Python, Elasticsearch, Kibana, Docker. Centralized logging: services push logs → search/filter in Kibana dashboard.. ELK stack, Docker Compose, log management",
+      "url": "https://elastic.co",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "CLI Tool for Productivity",
+      "description": "Python, Click / Typer, Rich. Build a CLI: todo manager, note taker, pomodoro timer with color output.. CLI design, argument parsing, packaging pip",
+      "url": "https://typer.tiangolo.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "beginner"
+      ]
+    },
+    {
+      "title": "2D Platformer Game",
+      "description": "Python, Pygame / Godot. Side-scroller with physics, enemies, collectibles, levels, leaderboard.. Game loops, collision detection, sprite animation",
+      "url": "https://pygame.org / godotengine.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "game-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Multiplayer Snake Game",
+      "description": "JavaScript, Canvas, Socket.io. Classic Snake but multiplayer — up to 4 players on same server.. Canvas API, WebSockets, game state sync",
+      "url": "https://socket.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "game-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Chess Engine",
+      "description": "Python / JavaScript, alpha-beta. Playable chess with AI opponent using Minimax + alpha-beta pruning.. Game trees, alpha-beta, bitboards",
+      "url": "https://chessprogramming.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "game-dev",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Wordle Clone with Stats",
+      "description": "HTML, CSS, Vanilla JS. Exact Wordle clone + hard mode, dark theme, statistics tracking.. DOM manipulation, localStorage, animations",
+      "url": "https://developer.mozilla.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "game-dev",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Figma Plugin",
+      "description": "TypeScript, Figma Plugin API. Utility plugin: auto-rename layers, generate color palettes, insert icons.. Figma Plugin API, TypeScript, UI design",
+      "url": "https://figma.com/plugin-docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "design-tools",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "AI Image Caption Generator",
+      "description": "Python, BLIP / CLIP, Gradio. Upload image → AI generates description + relevant hashtags for social media.. Vision models, Gradio UI, image-to-text",
+      "url": "https://huggingface.co/Salesforce/blip",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "design-tools",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Logo Generator with AI",
+      "description": "Python, Stable Diffusion, Streamlit. Input company name + keywords → generate logo variations.. Stable Diffusion, prompt engineering, image gen",
+      "url": "https://stability.ai",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "design-tools",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Notion-like Note App",
+      "description": "React, TipTap editor, Supabase. Block-based note editor with nested pages, slash commands, sharing.. Rich text editor, block structure, real-time sync",
+      "url": "https://tiptap.dev",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Pomodoro Focus Timer",
+      "description": "Vanilla JS / React, CSS animations. 25/5 timer with task list, session history, Spotify ambient sound toggle.. Timers, state management, audio API",
+      "url": "https://developer.mozilla.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Meeting Summarizer Bot",
+      "description": "Python, Whisper, OpenAI, Zoom API. Record meeting audio → transcribe → extract action items → email summary.. Speech-to-text, LLM summarization, email APIs",
+      "url": "https://openai.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "GitHub Activity Newsletter",
+      "description": "Python, GitHub API, Resend / SendGrid. Weekly digest of starred repos, trending topics emailed every Monday.. GitHub API, email automation, cron jobs",
+      "url": "https://resend.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Kanban Board App",
+      "description": "React, DnD library, Supabase. Drag-and-drop kanban with labels, due dates, comments, team assignment.. DnD, real-time DB, collaboration features",
+      "url": "https://supabase.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Focus Mode Browser Extension",
+      "description": "JavaScript, Chrome Extensions API. Block distracting sites during work sessions with whitelist + break timer.. Chrome extension APIs, content scripts, storage",
+      "url": "https://developer.chrome.com/extensions",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "productivity",
+        "beginner"
+      ]
+    },
+    {
+      "title": "REST API + Full Docs",
+      "description": "Python, FastAPI, SQLite / PostgreSQL. CRUD API with auth, rate limiting, auto-generated Swagger/OpenAPI docs.. REST design, FastAPI, JWT auth, OpenAPI",
+      "url": "https://fastapi.tiangolo.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "backend-api",
+        "beginner"
+      ]
+    },
+    {
+      "title": "GraphQL API Server",
+      "description": "Node.js, Apollo Server, Prisma. GraphQL API with queries, mutations, subscriptions, real-time updates.. GraphQL schema, resolvers, subscriptions",
+      "url": "https://apollographql.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "backend-api",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Serverless Functions API",
+      "description": "Vercel Functions / Cloudflare Workers. Deploy API endpoints without managing servers. Use for microservices.. Serverless architecture, edge functions, cold starts",
+      "url": "https://vercel.com/docs/functions",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "backend-api",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Webhook Event Processor",
+      "description": "Node.js, Stripe webhooks, Prisma. Handle Stripe payment events: update DB, send emails, generate invoices.. Webhooks, event-driven architecture, idempotency",
+      "url": "https://stripe.com/docs/webhooks",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "backend-api",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Rate Limiter Middleware",
+      "description": "Node.js, Redis, Express. Build a sliding window rate limiter with Redis. Add to existing Express app.. Redis, distributed systems, middleware patterns",
+      "url": "https://redis.io/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "backend-api",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Retrieval Augmented Gen App",
+      "description": "Python, LangChain, Pinecone/Chroma, OpenAI. Chat with your own documents (PDFs, URLs). Vector DB + GPT retrieval.. RAG, vector embeddings, semantic search",
+      "url": "https://python.langchain.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "AI Agent with Tools",
+      "description": "Python, LangGraph / AutoGen, OpenAI. AI agent that can search the web, write code, run it, and iterate.. Agent frameworks, tool calling, LLM orchestration",
+      "url": "https://github.com/microsoft/autogen",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Multimodal AI App",
+      "description": "Python, GPT-4o / Gemini, Gradio. Input text + image + audio → unified AI response with cross-modal reasoning.. Multimodal LLMs, Gradio, media processing",
+      "url": "https://openai.com/gpt-4o",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Smart Flashcard System",
+      "description": "Python, OpenAI, Anki / Supabase. Paste any text → AI generates Q&A flashcards with spaced repetition scheduling.. LLM output structuring, spaced repetition, education tech",
+      "url": "https://openai.com/docs",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Code Explainer Tool",
+      "description": "Python, OpenAI, Streamlit. Paste any code → AI explains line-by-line in simple English + suggests improvements.. Prompt engineering, code parsing, UX design",
+      "url": "https://streamlit.io",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "beginner"
+      ]
+    },
+    {
+      "title": "WhatsApp Bot with AI",
+      "description": "Python, WhatsApp Business API / Twilio. Send message → bot replies with AI answers, can set reminders, answer FAQs.. WhatsApp API, webhook handling, LLM integration",
+      "url": "https://twilio.com/whatsapp",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Open Source Contribution Finder",
+      "description": "React, GitHub API, TailwindCSS. Enter your skills → find matching open source issues to contribute to.. GitHub API, filtering UX, developer tools",
+      "url": "https://docs.github.com/en/rest",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "tools",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Interview Prep Platform",
+      "description": "Next.js, OpenAI, Supabase, TailwindCSS. Mock interviews with AI feedback, coding challenges, DSA tracker.. Full-stack, LLM evaluation, competitive programming",
+      "url": "https://nextjs.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Competitive Programming Tracker",
+      "description": "React, Codeforces API, LeetCode scrape. Track your CP progress across platforms — rating graph, problems solved, streaks.. API aggregation, charting, user profiles",
+      "url": "https://codeforces.com/apiHelp",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "tools",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Micro-SaaS Idea Validator",
+      "description": "Python, OpenAI, Google Trends API. Input business idea → AI checks competition, market size, keyword trends.. LLM chains, Google Trends API, market research",
+      "url": "https://trends.google.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "Design System Component Lib",
+      "description": "React, TypeScript, Storybook, TailwindCSS. Build your own reusable UI component library with docs & Storybook stories.. Component APIs, TypeScript, documentation, design tokens",
+      "url": "https://storybook.js.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "intermediate"
+      ]
+    },
+    {
+      "title": "CLI GitHub Stats Dashboard",
+      "description": "Python, Rich, GitHub API. Terminal dashboard showing your GitHub stats live with colors and charts.. Terminal UI, GitHub API, Rich library",
+      "url": "https://github.com/Textualize/rich",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "devops",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Open-source CRM Lite",
+      "description": "Next.js, Prisma, PostgreSQL, Resend. Lightweight CRM: contacts, deals pipeline, email sequences, notes, tags.. Complex data modeling, pipeline UX, email integration",
+      "url": "https://nextjs.org",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "web-dev",
+        "advanced"
+      ]
+    },
+    {
+      "title": "Leetcode Problem Explainer",
+      "description": "Python, OpenAI, Browser Extension. Highlight a Leetcode problem → get 3 different approaches explained simply.. Chrome extension, LLM prompt design, competitive programming",
+      "url": "https://developer.chrome.com",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "ai-ml",
+        "beginner"
+      ]
+    },
+    {
+      "title": "Real-time Crypto Dashboard",
+      "description": "React, CoinGecko API, Recharts. Live prices, market cap, 7-day chart for top 100 coins. No API key needed.. WebSockets, REST polling, charting, CoinGecko free API",
+      "url": "https://coingecko.com/api/documentation",
+      "source": "radar-projects",
+      "tags": [
+        "project-idea",
+        "data-science",
+        "beginner"
+      ]
+    }
+  ],
+  "swag": [
+    {
+      "title": "GitHub Student Developer Pack",
+      "description": "$200,000+ worth of free tools: Namecheap domain, DigitalOcean $200, DataCamp, Canva Pro, JetBrains, MongoDB Atlas, and 60+ more. Claim: Verify student email or student ID at education.github.com Value: $200,000+",
+      "url": "https://education.github.com/pack",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Hacktoberfest (DigitalOcean)",
+      "description": "Complete 4 quality PRs in October → free Hacktoberfest T-shirt + stickers (or plant a tree). Physical swag shipped worldwide. Claim: Register at hacktoberfest.com, make 4 PRs to participating repos Value: ~$20",
+      "url": "https://hacktoberfest.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "MLH (Major League Hacking)",
+      "description": "GitHub Pro, .tech domain, DigitalOcean credits, MongoDB Atlas, interview.io access, Wolfram credits at every MLH event. Claim: Attend or compete at any MLH-affiliated hackathon. Check schedule. Value: $300+/event",
+      "url": "https://mlh.io/benefits",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "AWS Educate",
+      "description": "$100 AWS credits + 800+ hours of free training, AWS certifications prep, free lab environments. Claim: Apply at aws.amazon.com/education/awseducate with .edu email Value: $200+",
+      "url": "https://aws.amazon.com/education/awseducate",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Google Cloud for Students",
+      "description": "$300 free credits for all new GCP users. Sustained with research/startup programs. BigQuery, Vertex AI, Cloud Run free tier. Claim: Create GCP account → free trial. For more, apply to Google for Startups. Value: $300",
+      "url": "https://cloud.google.com/free",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Microsoft Azure for Students",
+      "description": "$100 free credits without credit card. Access to Azure AI, VMs, Cosmos DB, App Service. Renew yearly with student verification. Claim: Verify with .edu email at azure.microsoft.com/en-us/free/students Value: $100/year",
+      "url": "https://azure.microsoft.com/en-us/free/students",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "JetBrains Student License",
+      "description": "Free access to ALL JetBrains IDEs: IntelliJ IDEA, PyCharm, WebStorm, GoLand, CLion, DataGrip, Rider — worth $700+/year. Claim: Apply with .edu email or GitHub Student Pack at jetbrains.com/student Value: $700+/year",
+      "url": "https://jetbrains.com/community/education/#students",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Figma Education",
+      "description": "Figma Professional Plan free for students: unlimited projects, version history, team libraries, advanced prototyping. Claim: Apply with .edu email at figma.com/education Value: $144/year",
+      "url": "https://figma.com/education",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Notion for Students",
+      "description": "Notion Personal Pro plan free for students: unlimited uploads, unlimited version history, no page limits. Claim: Verify .edu email at notion.so/product/notion-for-education Value: $96/year",
+      "url": "https://notion.so/product/notion-for-education",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Canva for Education",
+      "description": "Canva Pro free with all premium elements, templates, Brand Kit, background remover, Magic AI tools. Claim: Apply at canva.com/education with institutional email Value: $130/year",
+      "url": "https://canva.com/education",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Namecheap Student Domain",
+      "description": "Free .me domain for 1 year + SSL certificate via GitHub Student Pack. Perfect for portfolio website. Claim: Claim via GitHub Student Developer Pack at namecheap.com/github-student/ Value: $12/year",
+      "url": "https://namecheap.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "DigitalOcean $200 Credit",
+      "description": "$200 in cloud hosting credit for 60 days via GitHub Student Pack. Enough to run a full web app for months. Claim: Claim via GitHub Student Developer Pack Value: $200",
+      "url": "https://digitalocean.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "MongoDB Atlas for Students",
+      "description": "MongoDB Atlas $200 credit for cloud MongoDB hosting. Free M0 cluster always included. Claim: Claim via GitHub Student Pack or register at mongodb.com/students Value: $200",
+      "url": "https://mongodb.com/students",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "DataCamp (via GitHub Pack)",
+      "description": "3 months free DataCamp Premium: Python, R, SQL, ML, data viz courses with certificates. Claim: Claim via GitHub Student Developer Pack Value: $99",
+      "url": "https://datacamp.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Coursera (Financial Aid)",
+      "description": "Full financial aid for any Coursera course/specialization including Google, Meta, IBM certificates. Free with application. Claim: Apply for financial aid on each course listing. Approve in ~15 days. Value: $49-$300/course",
+      "url": "https://coursera.org/financial-aid",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "freeCodeCamp Certifications",
+      "description": "6 free certifications: Web Dev, JS, Python, Data Analysis, ML, InfoSec. 300 hours each. Fully free, forever. Claim: Sign up and complete projects at freecodecamp.org Value: Free",
+      "url": "https://freecodecamp.org",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Postman Student Plan",
+      "description": "Postman Professional features free for verified students: unlimited team workspaces, collection runs, mock servers. Claim: Verify at learning.postman.com/student-program/ Value: $12/month free",
+      "url": "https://learning.postman.com/student-program",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Heroku Student Pack",
+      "description": "Hobby Dyno for 2 years free via GitHub Student Pack: always-on web app hosting (no sleep mode). Claim: Claim via GitHub Student Developer Pack Value: $84",
+      "url": "https://heroku.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Stripe Developer Credits",
+      "description": "Waived transaction fees on first $1,000 in payments processed + access to startup program after. Claim: Sign up for Stripe Atlas or Student Pack program Value: Variable",
+      "url": "https://stripe.com/atlas",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "1Password Students",
+      "description": "1Password free for 1 year for students. Best-in-class password manager for all devices. Claim: Apply with .edu email at 1password.com/students Value: $35.88/year",
+      "url": "https://1password.com/students",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Termius Student Plan",
+      "description": "Termius Pro free for students: SSH client, SFTP, key manager, team sync — cross-platform. Claim: Apply via GitHub Student Pack or termius.com/students Value: $100/year",
+      "url": "https://termius.com/students",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Working Copy (iOS Git)",
+      "description": "Working Copy Pro free for students (iOS Git client with full push/pull/branch support). Claim: Apply via GitHub Student Pack Value: $19.99",
+      "url": "https://workingcopyapp.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Dashlane (via Dev Pack)",
+      "description": "Dashlane Premium free for 6 months via GitHub Student Pack. Password manager + dark web monitoring. Claim: Claim via GitHub Student Developer Pack Value: $33",
+      "url": "https://dashlane.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "PomoDone Student Discount",
+      "description": "Productivity/Pomodoro app free for students. Integrates with Trello, Asana, Jira. Claim: Contact with .edu email Value: $48/year",
+      "url": "https://pomodoneapp.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Icons8 (via GitHub Pack)",
+      "description": "Icons8 Pro free for 3 months: 1M+ icons, stock photos, AI image generation, music. Claim: Claim via GitHub Student Developer Pack Value: $29/month",
+      "url": "https://icons8.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Pendo for Startups",
+      "description": "Free Pendo analytics for early-stage apps (track user behavior, feature adoption, NPS surveys). Claim: Apply at pendo.io/pendo-for-good/startups Value: $7K+/year",
+      "url": "https://pendo.io/pendo-for-good",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Twilio for Students",
+      "description": "$15 Twilio credit for SMS/Voice APIs. Enough for thousands of SMS messages for projects. Claim: Claim via GitHub Student Pack. Sign up with .edu email. Value: $15",
+      "url": "https://twilio.com/try-twilio",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Sendgrid (via GitHub Pack)",
+      "description": "SendGrid 15k emails/month free for 1 year via GitHub Student Pack. Transactional email API. Claim: Claim via GitHub Student Developer Pack Value: $89/year",
+      "url": "https://sendgrid.com/github-student",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Cloudflare Workers Free Tier",
+      "description": "100k free Worker requests/day, 1GB KV storage, free R2 object storage (10GB). No credit card. Claim: Sign up at cloudflare.com/workers — free tier is permanent Value: Unlimited",
+      "url": "https://workers.cloudflare.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Vercel Hobby Plan",
+      "description": "Free serverless hosting: unlimited deployments, 100GB bandwidth, SSL, custom domains. Always free. Claim: Sign up at vercel.com. No credit card needed. Value: Free",
+      "url": "https://vercel.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Netlify Free Tier",
+      "description": "Free web hosting: 100GB bandwidth, form handling, identity (auth), serverless functions. Claim: Sign up at netlify.com — no credit card Value: Free",
+      "url": "https://netlify.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Supabase Free Tier",
+      "description": "2 free projects: PostgreSQL DB, auth, storage, edge functions. Pause inactive projects to keep free. Claim: Sign up at supabase.com — no credit card Value: Free",
+      "url": "https://supabase.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "PlanetScale Hobby Plan",
+      "description": "Free MySQL: 5GB storage, 1B row reads/month, branching, automatic scaling. No credit card. Claim: Sign up at planetscale.com/pricing — hobby tier Value: Free",
+      "url": "https://planetscale.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Railway Starter Plan",
+      "description": "$5/month free credit on Railway: deploy any app from GitHub in seconds. Postgres, Redis included. Claim: Sign up at railway.app — GitHub login. $5 credit auto-applied. Value: $60/year",
+      "url": "https://railway.app/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Render Free Tier",
+      "description": "Free web services (spins down on inactivity), 750 hours/month, free PostgreSQL (expires 90 days). Claim: Sign up at render.com — no credit card for free tier Value: Free",
+      "url": "https://render.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Fly.io Free Allowance",
+      "description": "3 free VMs (256MB RAM each), 3GB persistent storage, 160GB outbound transfer. No credit card needed. Claim: Sign up at fly.io — create account, deploy with flyctl Value: ~$10/mo",
+      "url": "https://fly.io/docs/about/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Neon Free Tier",
+      "description": "1 free Postgres project, 0.5GB storage, 1 compute unit. Serverless Postgres with branching. Claim: Sign up at neon.tech — no credit card needed Value: Free",
+      "url": "https://neon.tech/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Upstash Free Tier",
+      "description": "Free Redis: 10k commands/day, 256MB storage. Free Kafka: 10k messages/day. Serverless pricing. Claim: Sign up at upstash.com — no credit card Value: Free",
+      "url": "https://upstash.com/pricing",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "HuggingFace Spaces",
+      "description": "Free GPU/CPU hosting for ML demos on Hugging Face Spaces. Gradio/Streamlit apps deployable instantly. Claim: Create account at huggingface.co, create a Space Value: Free",
+      "url": "https://huggingface.co/spaces",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Google Colab Free",
+      "description": "Free GPU/TPU access for ML training notebooks. Run PyTorch, TensorFlow, JAX notebooks in browser. Claim: Go to colab.research.google.com — Google account needed Value: Free",
+      "url": "https://colab.research.google.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Kaggle Notebooks + GPU",
+      "description": "Free 30 hours/week of GPU + 20 hours/week of TPU. Access to 50,000+ datasets. Competitions with cash prizes. Claim: Create account at kaggle.com — phone verification needed Value: Free",
+      "url": "https://kaggle.com/code",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Oracle Always Free Cloud",
+      "description": "Always-free: 2 AMD VMs, 4 ARM VMs (up to 24GB RAM!), 200GB storage, load balancer. No expiry. Claim: Create account at oracle.com/cloud/free — credit card required, won't charge Value: ~$200+/yr",
+      "url": "https://oracle.com/cloud/free",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "IBM Cloud Lite",
+      "description": "IBM Watson APIs free: NLU, Speech to Text, Visual Recognition. CloudFoundry apps, Cloudant DB free. Claim: Create account at cloud.ibm.com — no credit card for Lite tier Value: Free",
+      "url": "https://cloud.ibm.com/catalog",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Dev.to Badges + Swag",
+      "description": "Various badge milestones + periodic swag giveaways to active contributors and article writers. Claim: Write articles, engage, participate in Dev.to challenges Value: Variable",
+      "url": "https://dev.to",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Hashnode Swag",
+      "description": "Stickers, t-shirts, and physical swag for blog challenges and Hashnode Ambassador program. Claim: Write in Hashnode Bootcamp / hackathons, become ambassador Value: Variable",
+      "url": "https://hashnode.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Google Developer Student Clubs",
+      "description": "Official GDSC swag (t-shirt, stickers, badge) for GDSC leads and active members. Access to Google events. Claim: Join your campus GDSC chapter or apply to be a lead. Value: ~$50",
+      "url": "https://developers.google.com/community/gdsc",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Microsoft Student Ambassador",
+      "description": "MSP swag pack, Azure credits, LinkedIn badge, Microsoft certification vouchers, conference invites. Claim: Apply at studentambassadors.microsoft.com — 2x/year intake Value: $200+",
+      "url": "https://studentambassadors.microsoft.com",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "AWS Community Builder",
+      "description": "AWS swag box, $300/year AWS credits, early access to services, conference tickets. Claim: Apply at aws.amazon.com/developer/community/community-builders/ Value: $400+",
+      "url": "https://aws.amazon.com/developer/community/community-builders",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "Google Cloud Champion Innovator",
+      "description": "Google Cloud swag, $500 GCP credits, access to Google Cloud events and beta features. Claim: Apply at cloud.google.com/innovators — apply during open enrollment Value: $600+",
+      "url": "https://cloud.google.com/innovators",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    },
+    {
+      "title": "GitHub Campus Expert",
+      "description": "GitHub swag pack, training resources, speaking opportunities, GitHub credits for campus events. Claim: Apply at githubcampus.expert — must be enrolled student with community presence Value: $100+",
+      "url": "https://githubcampus.expert",
+      "source": "radar-swag",
+      "tags": [
+        "swag",
+        "free",
+        "student"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "title": "Software Engineer Intern — Stripe",
+      "description": "Software Engineer Intern at Stripe. Python, Go, Ruby, distributed systems. YC S09. Work on global payments infra used by millions. Best eng culture.",
+      "url": "https://stripe.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Science Intern — Airbnb",
+      "description": "Data Science Intern at Airbnb. Python, SQL, A/B testing, ML. YC W09. Scale + trust & safety ML is world-class. Great mentorship.",
+      "url": "https://airbnb.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer Intern — Dropbox",
+      "description": "Backend Engineer Intern at Dropbox. Python, Rust, distributed storage. YC S07. Deep distributed systems work. Remote-first culture.",
+      "url": "https://dropbox.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "iOS/Android Engineer Intern — Coinbase",
+      "description": "iOS/Android Engineer Intern at Coinbase. Swift / Kotlin, crypto, mobile. YC S12. Crypto + fintech. Equity compensation. Cutting-edge product.",
+      "url": "https://coinbase.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "ML Engineer Intern — Doordash",
+      "description": "ML Engineer Intern at Doordash. Python, ML, real-time systems, logistics. YC S13. Real-world ML at scale — ETA prediction, fraud, recommendations.",
+      "url": "https://doordash.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Product Engineer Intern — Instacart",
+      "description": "Product Engineer Intern at Instacart. React, Python, PostgreSQL, GraphQL. YC S12. Full product ownership. Ship features used by millions.",
+      "url": "https://instacart.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Engineer Intern — Reddit",
+      "description": "Data Engineer Intern at Reddit. Spark, dbt, Kafka, Python, SQL. YC S05. Massive-scale data infra. Great for data eng portfolio.",
+      "url": "https://reddit.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer Intern — Twitch",
+      "description": "Full Stack Engineer Intern at Twitch. React, Node.js, Go, video streaming. YC W07. Video streaming tech, live product impact, gaming culture.",
+      "url": "https://twitch.tv/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer — GitLab",
+      "description": "Backend Engineer at GitLab. Ruby on Rails, PostgreSQL, Go, DevOps. Fully remote company. Transparent culture. Work on developer tools.",
+      "url": "https://gitlab.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Scale AI",
+      "description": "Software Engineer Intern at Scale AI. Python, TypeScript, distributed systems. YC W16. Core AI data infra for OpenAI, Meta, US DoD. High growth.",
+      "url": "https://scale.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Frontend Engineer Intern — Retool",
+      "description": "Frontend Engineer Intern at Retool. React, TypeScript, drag-and-drop UI, Canvas. YC W17. Internal tools platform. Great frontend complexity.",
+      "url": "https://retool.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Analyst Intern — Pave",
+      "description": "Data Analyst Intern at Pave. SQL, Python, compensation data, Excel. YC S20. Comp benchmarking data for top companies. Niche, growing.",
+      "url": "https://pave.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer — Segment (Twilio)",
+      "description": "Backend Engineer at Segment (Twilio). Node.js, Kafka, AWS, data pipelines. YC S11. Data infrastructure product. Acquired by Twilio for $3.2B.",
+      "url": "https://twilio.com/company/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Brex",
+      "description": "Software Engineer Intern at Brex. Elixir, TypeScript, financial services. YC W17. FinTech for startups. Excellent stipend, stock options.",
+      "url": "https://brex.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Frontend Engineer — Linear",
+      "description": "Frontend Engineer at Linear. React, TypeScript, real-time sync, Electron. YC W20. Premium dev tools product. Obsessed with craft and speed.",
+      "url": "https://linear.app/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Razorpay",
+      "description": "Software Engineer Intern at Razorpay. Java, Node.js, payment systems, MySQL. India's top payments startup. Work on systems processing ₹1000Cr/day.",
+      "url": "https://razorpay.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Developer Intern — Zerodha",
+      "description": "Backend Developer Intern at Zerodha. Go, Python, trading systems, WebSockets. India's #1 stockbroker. Bootstrapped unicorn. Tech-first culture.",
+      "url": "https://zerodha.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "iOS/Android Engineer — CRED",
+      "description": "iOS/Android Engineer at CRED. Swift/Kotlin, design systems, fintech. Unicorn fintech. Design-obsessed product. Great for mobile devs.",
+      "url": "https://cred.club/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Data Scientist Intern — Meesho",
+      "description": "Data Scientist Intern at Meesho. Python, SQL, ML, e-commerce analytics. E-commerce for Bharat. ML for supply chain, pricing, recommendations.",
+      "url": "https://meesho.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — BrowserStack",
+      "description": "Software Engineer Intern at BrowserStack. JavaScript, Node.js, browser automation, QA. Remote-first. Work on testing infra used by Google, Microsoft, etc.",
+      "url": "https://browserstack.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer Intern — Groww",
+      "description": "Full Stack Engineer Intern at Groww. React, Spring Boot, MySQL, fintech. Fastest-growing investment platform. Serve 40M+ users.",
+      "url": "https://groww.in/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "ML Engineer Intern — PhonePe",
+      "description": "ML Engineer Intern at PhonePe. Python, ML, fraud detection, real-time. UPI payments leader. ML for risk, fraud, personalization at scale.",
+      "url": "https://phonepe.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Postman",
+      "description": "Software Engineer at Postman. TypeScript, React, API tools, cloud. Developer tools company. 25M+ users. Strong eng culture.",
+      "url": "https://postman.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Freshworks",
+      "description": "Software Engineer Intern at Freshworks. Ruby on Rails, React, SaaS, B2B. Listed company. CRM/helpdesk SaaS. Good training program for freshers.",
+      "url": "https://freshworks.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer Intern — Chargebee",
+      "description": "Backend Engineer Intern at Chargebee. Java, MySQL, subscription billing, SaaS. Subscription billing for SaaS companies. YC-backed, unicorn.",
+      "url": "https://chargebee.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Developer Advocate Intern — Hasura",
+      "description": "Developer Advocate Intern at Hasura. GraphQL, PostgreSQL, technical writing, community. Open-source GraphQL engine. Great for learning + community building.",
+      "url": "https://hasura.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer Intern — Setu (by Pine Labs)",
+      "description": "Backend Engineer Intern at Setu (by Pine Labs). Go, Node.js, fintech APIs, payments. B2B fintech API platform. Deep UPI/payments stack. Backed by Tiger Global.",
+      "url": "https://setu.co/about/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Analyst Intern — Unacademy",
+      "description": "Data Analyst Intern at Unacademy. SQL, Python, Tableau, edtech metrics. Ed-tech unicorn. Analytics work spans 50M+ learner data.",
+      "url": "https://unacademy.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "SDE Intern — Sprinklr",
+      "description": "SDE Intern at Sprinklr. Java, React, enterprise SaaS, microservices. Listed enterprise SaaS. Good for backend + infra work.",
+      "url": "https://sprinklr.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Zoho",
+      "description": "Software Engineer at Zoho. Java, C++, product development, SaaS. Bootstrapped, profitable. Multiple product lines. Good for freshers.",
+      "url": "https://zoho.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Developer Experience Engineer — Vercel",
+      "description": "Developer Experience Engineer at Vercel. Next.js, Node.js, CLI, developer advocacy. Build tools used by every Next.js developer. Remote-first, async culture.",
+      "url": "https://vercel.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer — Supabase",
+      "description": "Full Stack Engineer at Supabase. TypeScript, PostgreSQL, Elixir, open-source. Open-source Firebase alternative. 60k GitHub stars. Async-first team.",
+      "url": "https://supabase.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — PlanetScale",
+      "description": "Software Engineer at PlanetScale. Go, MySQL, distributed DB, Kubernetes. Serverless MySQL company. Deep distributed DB work. Developer-loved product.",
+      "url": "https://planetscale.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "iOS Engineer — Loom (Atlassian)",
+      "description": "iOS Engineer at Loom (Atlassian). Swift, video, real-time recording, upload. Video messaging. Acquired by Atlassian. Great for mobile + media engineers.",
+      "url": "https://loom.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Notion",
+      "description": "Software Engineer Intern at Notion. TypeScript, React, Node.js, block editor. Product-led growth icon. Complex editor internals. Extremely high-quality eng.",
+      "url": "https://notion.so/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Product Engineer — Linear",
+      "description": "Product Engineer at Linear. React, TypeScript, Electron, real-time. Fast-moving team. Obsessive about product quality. #1 issue tracker.",
+      "url": "https://linear.app/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Railway",
+      "description": "Software Engineer at Railway. Rust, TypeScript, Docker, cloud infra, dev tools. Modern deployment platform. Small team, huge impact. DevOps + cloud.",
+      "url": "https://railway.app/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer — Cal.com",
+      "description": "Full Stack Engineer at Cal.com. Next.js, tRPC, Prisma, open-source. Open-source Calendly. YC W22. Fully remote. Work in public.",
+      "url": "https://cal.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Product Engineer — Tally",
+      "description": "Product Engineer at Tally. React, TypeScript, forms, UX. Notion-style form builder. Small team. High ownership.",
+      "url": "https://tally.so/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer — Codeium",
+      "description": "ML Engineer at Codeium. Python, CUDA, LLMs, code generation, fine-tuning. AI code completion. Competing with GitHub Copilot. Fast-growing AI startup.",
+      "url": "https://codeium.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Sourcegraph",
+      "description": "Software Engineer at Sourcegraph. Go, TypeScript, code search, AI, developer tools. Code search + AI for enterprises. Fully remote since founding.",
+      "url": "https://sourcegraph.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Descript",
+      "description": "Software Engineer at Descript. Electron, React, audio/video, TypeScript. AI-powered audio/video editor. Complex media engineering.",
+      "url": "https://descript.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Replit",
+      "description": "Software Engineer Intern at Replit. TypeScript, Node.js, browser sandboxing, cloud IDE. Online coding environment for 30M+ users. Complex infra work.",
+      "url": "https://replit.com/site/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Fly.io",
+      "description": "Software Engineer at Fly.io. Go, Rust, Docker, distributed systems, networking. Cloud platform competing with Heroku/Railway. Deep systems work.",
+      "url": "https://fly.io/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Warp",
+      "description": "Software Engineer at Warp. Rust, terminal, Swift (macOS), GPU rendering. AI-native terminal. Hard systems engineering. Rust + GPU rendering.",
+      "url": "https://warp.dev/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "SWE Intern (STEP / SWE) — Google",
+      "description": "SWE Intern (STEP / SWE) at Google. DSA, Python/Java/C++, system design. STEP for 1st/2nd yr, SWE for 3rd/4th yr. Best resume brand globally.",
+      "url": "https://careers.google.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "SWE Intern — Microsoft",
+      "description": "SWE Intern at Microsoft. C#, C++, Azure, TypeScript, .NET. MSIDC Hyderabad hires extensively. Azure, Office, VS Code teams.",
+      "url": "https://careers.microsoft.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Meta",
+      "description": "Software Engineer Intern at Meta. C++, Python, distributed systems, React. Work on WhatsApp, Instagram, AI infra. High comp. Great mentorship.",
+      "url": "https://metacareers.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "SDE Intern — Amazon",
+      "description": "SDE Intern at Amazon. Java, Python, AWS, distributed systems. AWS teams in Bangalore. Prime, Alexa, Kuiper. Leadership principles interview.",
+      "url": "https://amazon.jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Adobe",
+      "description": "Software Engineer Intern at Adobe. C++, Java, React, Photoshop/PDF infra. Creative Cloud, Document Cloud, Firefly AI. Good WLB.",
+      "url": "https://adobe.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Atlassian",
+      "description": "Software Engineer Intern at Atlassian. Java, Python, React, Jira/Confluence stack. TEAM Anywhere (remote). Jira, Confluence, Bitbucket. Excellent culture.",
+      "url": "https://atlassian.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Intuit",
+      "description": "Software Engineer Intern at Intuit. Java, React, Python, fintech, ML. TurboTax, QuickBooks, Mailchimp. Bangalore centre growing fast.",
+      "url": "https://jobs.intuit.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Qualcomm",
+      "description": "Software Engineer Intern at Qualcomm. C, C++, embedded, DSP, firmware, drivers. Great for ECE + CSE. Modem, WiFi, DSP, driver stack work.",
+      "url": "https://qualcomm.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "ML / Systems Engineer Intern — NVIDIA",
+      "description": "ML / Systems Engineer Intern at NVIDIA. CUDA, C++, deep learning, GPU programming. GPU computing. CUDA kernels, cuDNN, TensorRT. Elite AI company.",
+      "url": "https://nvidia.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Uber",
+      "description": "Software Engineer Intern at Uber. Go, Java, Python, distributed systems, maps. Uber Eats & Mobility. Real-time location, pricing, routing at massive scale.",
+      "url": "https://uber.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — OpenAI",
+      "description": "Software Engineer at OpenAI. Python, distributed systems, CUDA, LLMs. The AI frontier. Work on GPT, DALL-E, safety. Very competitive.",
+      "url": "https://openai.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Research Engineer Intern — Anthropic",
+      "description": "Research Engineer Intern at Anthropic. Python, ML, alignment research, PyTorch. AI safety research. Work on Claude. Best for AI/safety-focused students.",
+      "url": "https://anthropic.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "ML Engineer — Mistral AI",
+      "description": "ML Engineer at Mistral AI. Python, PyTorch, LLM pre-training, CUDA. European open-source LLM lab. Competing with OpenAI/Anthropic.",
+      "url": "https://mistral.ai/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer Intern — Hugging Face",
+      "description": "ML Engineer Intern at Hugging Face. Python, PyTorch, Transformers, open-source ML. The GitHub for ML. Work on Transformers, Datasets, Spaces, Inference.",
+      "url": "https://huggingface.co/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Figma",
+      "description": "Software Engineer Intern at Figma. TypeScript, C++, WebAssembly, Canvas, Rust. Design tool. Complex WebAssembly + canvas rendering. Acquired by Adobe (blocked) → independent again.",
+      "url": "https://figma.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Cloudflare",
+      "description": "Software Engineer Intern at Cloudflare. Rust, Go, distributed systems, CDN, security. Edge networking. Workers, R2, D1. Rust at scale. Global infra impact.",
+      "url": "https://cloudflare.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Temporal",
+      "description": "Software Engineer at Temporal. Go, TypeScript, workflow orchestration. Workflow orchestration platform. Used by Stripe, Datadog, Netflix.",
+      "url": "https://temporal.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Turso",
+      "description": "Software Engineer at Turso. Rust, SQLite, distributed edge DB, LibSQL. Edge SQLite DB. Rust-heavy. Cutting-edge infra for edge computing.",
+      "url": "https://turso.tech/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Deno",
+      "description": "Software Engineer at Deno. Rust, V8, TypeScript, Node.js alt runtime. Next-gen JS/TS runtime by Ryan Dahl (creator of Node.js). Rust core.",
+      "url": "https://deno.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Neon",
+      "description": "Software Engineer at Neon. Rust, PostgreSQL, serverless, Kubernetes. Serverless Postgres. Rust + PostgreSQL internals. Cutting-edge DB startup.",
+      "url": "https://neon.tech/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Product Manager Intern — Notion",
+      "description": "Product Manager Intern at Notion. Product thinking, SQL, user research, roadmap. Iconic PLG product. PM experience at a beloved product company.",
+      "url": "https://notion.so/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Product Designer Intern — Figma",
+      "description": "Product Designer Intern at Figma. Figma, user research, prototyping, visual design. Design at the best design tool company. Meta-level experience.",
+      "url": "https://figma.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "UX Research Intern — Canva",
+      "description": "UX Research Intern at Canva. User interviews, usability testing, synthesis. Best remote design company. Large impact. 150M+ users.",
+      "url": "https://canva.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Product Manager Intern — HubSpot",
+      "description": "Product Manager Intern at HubSpot. CRM analytics, B2B SaaS, product metrics. Inbound marketing leader. PM training program is excellent.",
+      "url": "https://hubspot.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Product Manager — Lenskart",
+      "description": "Product Manager at Lenskart. Product roadmap, SQL, O2O retail tech. Omnichannel retail tech. Physical + digital product intersection.",
+      "url": "https://lenskart.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Web Development Intern — Various Startups",
+      "description": "Web Development Intern at Various Startups. HTML, CSS, JavaScript, React, any framework. 2000+ WFH web dev internships. ₹5K-25K/mo stipend range.",
+      "url": "https://internshala.com/internships/web-development",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Science / ML Intern — Various Startups",
+      "description": "Data Science / ML Intern at Various Startups. Python, pandas, ML, Jupyter notebooks. 1500+ data science roles. Often includes live projects + certificate.",
+      "url": "https://internshala.com/internships/machine-learning",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Android / iOS Development Intern — Various Startups",
+      "description": "Android / iOS Development Intern at Various Startups. Java/Kotlin, Swift/Flutter, mobile UI. 800+ mobile dev internships. Often at bootstrapped startups.",
+      "url": "https://internshala.com/internships/android",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Python Development Intern — Various Startups",
+      "description": "Python Development Intern at Various Startups. Python, Django/Flask, automation, scripting. 1000+ roles. Great entry point for beginners.",
+      "url": "https://internshala.com/internships/python",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "UI/UX Design Intern — Various Startups",
+      "description": "UI/UX Design Intern at Various Startups. Figma, Sketch, wireframing, Zeplin. 600+ design internships. Good portfolio builder.",
+      "url": "https://internshala.com/internships/graphic-design",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Various Companies",
+      "description": "Software Engineer Intern at Various Companies. DSA, Java/Python/C++, system design basics. Filter: India + Internship + Software + Past month. 10k+ listings.",
+      "url": "https://linkedin.com/jobs/internships",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Data Analyst Intern — Various Companies",
+      "description": "Data Analyst Intern at Various Companies. Excel, SQL, Python, Power BI / Tableau. Filter: Data Analyst + Internship + India. Growing demand.",
+      "url": "https://linkedin.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Remote Software Engineer — Various Companies",
+      "description": "Remote Software Engineer at Various Companies. Any stack — open applications by company. Monthly thread. Hundreds of startup jobs. Filter: India OK / Remote.",
+      "url": "https://news.ycombinator.com/ask  (Who is Hiring? thread)",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Remote Developer — Various Companies",
+      "description": "Remote Developer at Various Companies. React, Python, Go, Node, Rust — any stack. Free public API. Filter by tag. Global remote jobs. No account needed.",
+      "url": "https://remoteok.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Startup Engineer — Various Companies",
+      "description": "Startup Engineer at Various Companies. Any tech stack — startup roles. AngelList jobs. Best for early-stage to Series B startup roles.",
+      "url": "https://wellfound.com/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Plaid",
+      "description": "Software Engineer Intern at Plaid. Python, Go, REST APIs, fintech, banking. Financial data infrastructure. Connects bank accounts to apps.",
+      "url": "https://plaid.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer Intern — Robinhood",
+      "description": "Backend Engineer Intern at Robinhood. Python, Django, Kafka, real-time trading. Zero-commission trading. High-traffic distributed systems.",
+      "url": "https://careers.robinhood.com",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Carta",
+      "description": "Software Engineer Intern at Carta. Python, React, equity management, fintech. Equity management for startups. Unique fintech domain knowledge.",
+      "url": "https://carta.com/company/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Figma",
+      "description": "Software Engineer at Figma. TypeScript, C++, WASM, Canvas, Rust. Most beloved design tool. Hard technical challenges at the product layer.",
+      "url": "https://figma.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Liveblocks",
+      "description": "Software Engineer at Liveblocks. TypeScript, CRDTs, WebSockets, real-time. Real-time collaboration infra (used by Framer, Figma competitors). Small team.",
+      "url": "https://liveblocks.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Clerk",
+      "description": "Software Engineer at Clerk. TypeScript, React, Node.js, auth protocols. Authentication-as-a-service. Used by 30k+ apps. Fast-growing YC startup.",
+      "url": "https://clerk.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Resend",
+      "description": "Software Engineer at Resend. TypeScript, Node.js, email protocols, React. Email API for developers. YC W23. Competing with SendGrid. Modern stack.",
+      "url": "https://resend.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Trigger.dev",
+      "description": "Software Engineer at Trigger.dev. TypeScript, Node.js, background jobs, Kubernetes. Open-source background jobs. YC W23. Work on dev infra.",
+      "url": "https://trigger.dev/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Inngest",
+      "description": "Software Engineer at Inngest. TypeScript, Go, serverless, event-driven. Event-driven serverless platform. YC W22. Small team, big scope.",
+      "url": "https://inngest.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Upstash",
+      "description": "Software Engineer at Upstash. Go, Rust, Redis, Kafka, serverless. Serverless Redis/Kafka. Globally distributed. High-performance infra.",
+      "url": "https://upstash.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Josh Talks",
+      "description": "Software Engineer at Josh Talks. React, Node.js, video, vernacular content. India's biggest vernacular video platform. Social impact + tech.",
+      "url": "https://joshtechnology.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Backend Engineer — Khatabook",
+      "description": "Backend Engineer at Khatabook. Go, microservices, fintech, vernacular apps. SMB fintech for Bharat. Massive market. Series C funded.",
+      "url": "https://khatabook.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer — Dukaan",
+      "description": "Full Stack Engineer at Dukaan. React Native, Node.js, D2C commerce. Shopify for India. 30-second store setup. Growing e-commerce infra.",
+      "url": "https://dukaan.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — slice",
+      "description": "Software Engineer at slice. Java, Kotlin, fintech, payments, cards. SuperCard for students. Interesting fintech UX problems.",
+      "url": "https://sliceit.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer — Glance",
+      "description": "ML Engineer at Glance. Python, TensorFlow, content ML, recommendations. InMobi product. AI-powered lock screen. 200M+ users globally.",
+      "url": "https://glance.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer Intern — Testbook",
+      "description": "Software Engineer Intern at Testbook. React, Node.js, EdTech, live tests, performance. Govt exam prep. 30M+ users. Real-time test infra at scale.",
+      "url": "https://testbook.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "SDE Intern — Classplus",
+      "description": "SDE Intern at Classplus. React Native, Node.js, video infra, EdTech. Creator economy for educators. Growing fast in Tier 2/3 markets.",
+      "url": "https://classplusapp.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "internship"
+      ]
+    },
+    {
+      "title": "Backend Engineer — Teachmint",
+      "description": "Backend Engineer at Teachmint. Node.js, WebRTC, video, microservices. Virtual classroom infra. WebRTC + real-time complexity.",
+      "url": "https://teachmint.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Darwinbox",
+      "description": "Software Engineer at Darwinbox. Java, React, HR tech, enterprise SaaS. India's #1 HCM platform. Enterprise SaaS with 650+ enterprise clients.",
+      "url": "https://darwinbox.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Facilio",
+      "description": "Software Engineer at Facilio. Node.js, IoT, React, building management. Connected buildings platform. IoT + enterprise SaaS. Global clients.",
+      "url": "https://facilio.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer — Privy",
+      "description": "Full Stack Engineer at Privy. React, Node.js, Web3, crypto, loyalty. Auth + wallets for Web3. YC W22. Growing web3 infra startup.",
+      "url": "https://privy.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Zed Industries",
+      "description": "Software Engineer at Zed Industries. Rust, GPU rendering, CRDTs, code editor. Next-gen Rust code editor by Atom/Tree-sitter creators. Extremely technical.",
+      "url": "https://zed.dev/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Turbo (Vercel)",
+      "description": "Software Engineer at Turbo (Vercel). Rust, Go, monorepo build tools, Node.js. Turborepo + Turbopack. Build tooling that affects every JS developer.",
+      "url": "https://vercel.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer Intern — Labelbox",
+      "description": "ML Engineer Intern at Labelbox. Python, data labeling, RLHF, ML pipeline. AI training data platform. Used by OpenAI, Google, Ford for data labeling.",
+      "url": "https://labelbox.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "internship"
+      ]
+    },
+    {
+      "title": "Software Engineer — Synthesia",
+      "description": "Software Engineer at Synthesia. Python, React, video synthesis, ML, TTS. AI video generation. No camera needed. Growing B2B AI product.",
+      "url": "https://synthesia.io/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer — ElevenLabs",
+      "description": "ML Engineer at ElevenLabs. Python, PyTorch, TTS, voice cloning, audio. Best-in-class AI voice generation. Viral growth. Small elite team.",
+      "url": "https://elevenlabs.io/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Pika Labs",
+      "description": "Software Engineer at Pika Labs. Python, diffusion models, video, React. AI text-to-video startup. Competing with Sora. YC-backed.",
+      "url": "https://pika.art/jobs",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Perplexity AI",
+      "description": "Software Engineer at Perplexity AI. Python, distributed systems, search, LLMs. AI answer engine. Growing rapidly. Used by 100M+ users.",
+      "url": "https://perplexity.ai/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "remote",
+        "full-time"
+      ]
+    },
+    {
+      "title": "ML Engineer — Magic (formerly Magic.dev)",
+      "description": "ML Engineer at Magic (formerly Magic.dev). Python, ML, code generation, LLMs. Autonomous software engineer. Raises from Google, Jane Street.",
+      "url": "https://magic.dev/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    },
+    {
+      "title": "Software Engineer — Anysphere (Cursor)",
+      "description": "Software Engineer at Anysphere (Cursor). TypeScript, Electron, VSCode, LLMs, Rust. AI-native code editor. $400M ARR. Best-funded AI dev tools startup.",
+      "url": "https://cursor.com/careers",
+      "source": "radar-jobs",
+      "tags": [
+        "job",
+        "onsite",
+        "full-time"
+      ]
+    }
+  ]
+}

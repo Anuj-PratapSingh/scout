@@ -288,6 +288,140 @@ export async function scrapeSwag(): Promise<Opportunity[]> {
   return results
 }
 
+// ─── RemoteOK — remote tech jobs (free public API) ───────────────────────────
+export async function scrapeRemoteOK(): Promise<Opportunity[]> {
+  try {
+    const res = await fetch(
+      'https://remoteok.com/api',
+      { headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/json' }, signal: AbortSignal.timeout(8000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    // First item is a legal notice object, skip it
+    const jobs: Array<{ position?: string; company?: string; description?: string; url?: string; tags?: string[]; date?: string }> = Array.isArray(data) ? data.slice(1) : []
+    return jobs.slice(0, 25).filter(j => j.position && j.url).map(j => ({
+      title: `${j.position} — ${j.company ?? 'Remote'}`,
+      description: j.description?.replace(/<[^>]*>/g, '').slice(0, 500) ?? '',
+      url: j.url!,
+      source: 'remoteok',
+      tags: ['job', 'remote', ...(j.tags ?? []).slice(0, 3)],
+    }))
+  } catch {
+    return []
+  }
+}
+
+// ─── Arbeitnow — remote dev jobs (free JSON API) ──────────────────────────────
+export async function scrapeArbeitnow(): Promise<Opportunity[]> {
+  try {
+    const res = await fetch(
+      'https://www.arbeitnow.com/api/job-board-api',
+      { headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/json' }, signal: AbortSignal.timeout(8000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    const jobs: Array<{ title: string; company_name: string; location: string; description: string; tags: string[]; url: string; remote: boolean }> = data.data ?? []
+    return jobs.slice(0, 20).map(j => ({
+      title: `${j.title} — ${j.company_name}`,
+      description: j.description?.replace(/<[^>]*>/g, '').slice(0, 500) ?? '',
+      url: j.url,
+      source: 'arbeitnow',
+      tags: ['job', j.remote ? 'remote' : j.location, ...(j.tags ?? []).slice(0, 2)].filter(Boolean),
+    }))
+  } catch {
+    return []
+  }
+}
+
+// ─── Jobicy — remote tech jobs (free JSON API) ────────────────────────────────
+export async function scrapeJobicy(): Promise<Opportunity[]> {
+  try {
+    const res = await fetch(
+      'https://jobicy.com/api/v2/remote-jobs?count=20&tag=tech',
+      { headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/json' }, signal: AbortSignal.timeout(8000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    const jobs: Array<{ jobTitle: string; companyName: string; jobDescription?: string; url: string; jobType?: string[]; jobGeo?: string }> = data.jobs ?? []
+    return jobs.slice(0, 20).map(j => ({
+      title: `${j.jobTitle} — ${j.companyName}`,
+      description: j.jobDescription?.replace(/<[^>]*>/g, '').slice(0, 500) ?? '',
+      url: j.url,
+      source: 'jobicy',
+      tags: ['job', 'remote', ...(j.jobType ?? []).map((t: string) => t.toLowerCase())].filter(Boolean),
+    }))
+  } catch {
+    return []
+  }
+}
+
+// ─── The Muse — curated tech jobs (free public API) ───────────────────────────
+export async function scrapeTheMuse(): Promise<Opportunity[]> {
+  try {
+    const res = await fetch(
+      'https://www.themuse.com/api/public/jobs?descending=true&page=1&category=Computer+and+IT&category=Data+and+Analytics',
+      { headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/json' }, signal: AbortSignal.timeout(8000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    const jobs: Array<{ name: string; company: { name: string }; refs: { landing_page: string }; contents?: string; locations?: Array<{ name: string }> }> = data.results ?? []
+    return jobs.slice(0, 20).map(j => ({
+      title: `${j.name} — ${j.company?.name ?? ''}`,
+      description: j.contents?.replace(/<[^>]*>/g, '').slice(0, 500) ?? '',
+      url: j.refs?.landing_page ?? 'https://www.themuse.com/jobs',
+      source: 'themuse',
+      tags: ['job', ...(j.locations?.map((l: { name: string }) => l.name.toLowerCase().replace(/,.*/, '')) ?? [])].filter(Boolean),
+    }))
+  } catch {
+    return []
+  }
+}
+
+// ─── YC Jobs — Y Combinator startup jobs ──────────────────────────────────────
+export async function scrapeYCJobs(): Promise<Opportunity[]> {
+  try {
+    const res = await fetch(
+      'https://www.ycombinator.com/jobs',
+      {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          Accept: 'text/html',
+        },
+        signal: AbortSignal.timeout(10000),
+      }
+    )
+    if (!res.ok) return []
+    const html = await res.text()
+    const results: Opportunity[] = []
+
+    // Try to extract from Next.js __NEXT_DATA__
+    const nextData = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/)
+    if (nextData) {
+      try {
+        const data = JSON.parse(nextData[1])
+        const jobs = data?.props?.pageProps?.jobListings ?? data?.props?.pageProps?.jobs ?? []
+        jobs.slice(0, 20).forEach((j: { role?: string; company?: { name?: string; slug?: string }; title?: string; location?: string }) => {
+          const title = j.role ?? j.title ?? ''
+          const company = j.company?.name ?? ''
+          if (title && company) {
+            results.push({
+              title: `${title} — ${company}`,
+              description: `Y Combinator portfolio company job. Location: ${j.location ?? 'See listing'}.`,
+              url: j.company?.slug ? `https://www.ycombinator.com/companies/${j.company.slug}/jobs` : 'https://www.ycombinator.com/jobs',
+              source: 'yc-jobs',
+              tags: ['job', 'startup', 'yc'],
+            })
+          }
+        })
+      } catch { /* ignore */ }
+    }
+
+    return results
+  } catch {
+    return []
+  }
+}
+
 // ─── EthGlobal — web3 hackathons ────────────────────────────────────────────
 export async function scrapeEthGlobal(): Promise<Opportunity[]> {
   try {

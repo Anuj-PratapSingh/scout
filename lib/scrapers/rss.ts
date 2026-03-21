@@ -10,6 +10,8 @@ const RSS_FEEDS = [
   { url: 'https://remotive.com/remote-jobs/feed/', source: 'remotive' },
   { url: 'https://weworkremotely.com/remote-programming-jobs.rss', source: 'weworkremotely' },
   { url: 'https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss', source: 'weworkremotely' },
+  { url: 'https://remote.co/remote-jobs/feed/', source: 'remote-co' },
+  { url: 'https://authenticjobs.com/feed/', source: 'authentic-jobs' },
   // GitHub blog (announcements, open source, grants)
   { url: 'https://github.blog/feed/', source: 'github-blog' },
   // IndieHackers
@@ -20,6 +22,13 @@ const RSS_FEEDS = [
   { url: 'https://developers.googleblog.com/atom.xml', source: 'google-developers' },
   // AWS open source blog (bounties, programs)
   { url: 'https://aws.amazon.com/blogs/opensource/feed/', source: 'aws-opensource' },
+  // Smashing Magazine — design & dev
+  { url: 'https://www.smashingmagazine.com/feed/', source: 'smashing' },
+  // India startup ecosystem
+  { url: 'https://yourstory.com/feed', source: 'yourstory' },
+  { url: 'https://inc42.com/feed/', source: 'inc42' },
+  // YC news / Startup School
+  { url: 'https://www.ycombinator.com/blog.xml', source: 'yc-blog' },
 ]
 
 async function fetchFeed(url: string): Promise<string | null> {
@@ -40,17 +49,38 @@ const SOURCE_DEFAULT_TAGS: Record<string, string[]> = {
   'hn-jobs': ['job', 'startup'],
   weworkremotely: ['job', 'remote'],
   remotive: ['job', 'remote'],
+  'remote-co': ['job', 'remote'],
+  'authentic-jobs': ['job', 'remote'],
   internshala: ['internship', 'india'],
   wellfound: ['job', 'startup'],
+  remoteok: ['job', 'remote'],
+  arbeitnow: ['job', 'remote'],
+  jobicy: ['job', 'remote'],
+  themuse: ['job'],
+  'yc-jobs': ['job', 'startup', 'yc'],
   devpost: ['hackathon', 'contest'],
   mlh: ['hackathon'],
   devfolio: ['hackathon'],
   unstop: ['hackathon', 'contest'],
+  dorahacks: ['hackathon', 'bounty'],
   ctftime: ['contest', 'security'],
+  codeforces: ['contest', 'competitive-programming'],
+  codechef: ['contest', 'competitive-programming'],
+  atcoder: ['contest', 'competitive-programming'],
+  topcoder: ['contest', 'prizes'],
+  'hackerearth-challenge': ['contest', 'coding'],
   hackerearth: ['hackathon', 'coding'],
   kaggle: ['competition', 'ml'],
   ethglobal: ['hackathon', 'web3'],
   swag: ['swag', 'free'],
+  issuehunt: ['bounty', 'open-source'],
+  immunefi: ['bounty', 'web3', 'security'],
+  hackerone: ['bounty', 'security'],
+  openbugbounty: ['bounty', 'security'],
+  smashing: ['blog', 'design', 'webdev'],
+  yourstory: ['blog', 'startup', 'india'],
+  inc42: ['blog', 'startup', 'india'],
+  'yc-blog': ['blog', 'startup', 'yc'],
 }
 
 // Strip HTML tags and decode common entities — keeps plain readable text

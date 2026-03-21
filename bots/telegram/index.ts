@@ -125,6 +125,7 @@ const onboardingScene = new Scenes.WizardScene<ScoutWizardContext>(
       custom_criteria: criteria,
       compulsory_criteria: [],
       match_threshold: threshold,
+      email_frequency: 1,
     }
 
     await sendInstantMatches(ctx, prefs)

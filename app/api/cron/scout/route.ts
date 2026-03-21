@@ -7,6 +7,24 @@ import { sendTelegramNotification } from '@/lib/notify/telegram'
 import { decryptKey } from '@/lib/crypto'
 import type { Opportunity, Preferences } from '@/lib/types'
 
+// Slot 1=5h, 2=8h, 3=14h, 4=17h, 5=20h — scout runs at slots 2,3,5
+function currentSlot(): number {
+  const h = new Date().getUTCHours()
+  if (h < 6) return 1
+  if (h < 11) return 2
+  if (h < 15) return 3
+  if (h < 18) return 4
+  return 5
+}
+
+const FREQ_SLOTS: Record<number, number[]> = {
+  1: [3],
+  2: [2, 5],
+  3: [2, 3, 5],
+  4: [1, 2, 4, 5],
+  5: [1, 2, 3, 4, 5],
+}
+
 export const runtime = 'nodejs'
 export const maxDuration = 60
 
@@ -63,11 +81,17 @@ export async function POST(req: Request) {
     if (!users?.length) return NextResponse.json({ ok: true, inserted, notified: 0 })
 
     let notified = 0
+    const slot = currentSlot()
 
     for (const user of users) {
       const prefsRaw = user.preferences as unknown
       const prefs = (Array.isArray(prefsRaw) ? prefsRaw[0] : prefsRaw) as Preferences | undefined
       if (!prefs) continue
+
+      // Slot-based frequency check — skip users not scheduled for this slot
+      const freq = prefs.email_frequency ?? 1
+      const activeSlots = FREQ_SLOTS[freq] ?? FREQ_SLOTS[1]
+      if (!activeSlots.includes(slot)) continue
 
       const allCriteria = [...(prefs.categories ?? []), ...(prefs.custom_criteria ?? [])]
 

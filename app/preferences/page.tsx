@@ -9,6 +9,7 @@ export default function PreferencesPage() {
   const [criteria, setCriteria] = useState<string[]>([])
   const [compulsory, setCompulsory] = useState<string[]>([])
   const [threshold, setThreshold] = useState(5)
+  const [emailFreq, setEmailFreq] = useState(1)
   const [criteriaInput, setCriteriaInput] = useState('')
   const [apiKeys, setApiKeys] = useState<Record<string, string>>({})
   const [saving, setSaving] = useState(false)
@@ -28,6 +29,7 @@ export default function PreferencesPage() {
           setCriteria(p.custom_criteria ?? [])
           setCompulsory(p.compulsory_criteria ?? [])
           setThreshold(p.match_threshold ?? 5)
+          setEmailFreq(p.email_frequency ?? 1)
         })
     })
   }, [])
@@ -57,7 +59,7 @@ export default function PreferencesPage() {
     await fetch('/api/preferences', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ categories, custom_criteria: criteria, compulsory_criteria: compulsory, match_threshold: threshold, keys: apiKeys }),
+      body: JSON.stringify({ categories, custom_criteria: criteria, compulsory_criteria: compulsory, match_threshold: threshold, email_frequency: emailFreq, keys: apiKeys }),
     })
     setSaving(false)
     setSaved(true)
@@ -155,11 +157,36 @@ export default function PreferencesPage() {
           </div>
         </section>
 
-        {/* BYOK */}
-        <section style={{ marginBottom: '2.5rem' }}>
-          {label('API Keys (optional)')}
+        {/* Email frequency */}
+        <section style={{ marginBottom: '2rem' }}>
+          {label('Email frequency')}
           <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
-            Scout works without these. Add your own keys to unlock higher limits.
+            How many times per day Scout can email you. Sends are spaced equally from 5am to 9pm UTC.
+          </p>
+          <div style={{ border: 'var(--border)', boxShadow: 'var(--shadow-sm)', padding: '1rem 1.25rem', borderRadius: '2px', background: 'var(--bg)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>Max emails / day</span>
+              <span style={{ fontFamily: 'var(--font-head)', fontSize: '1rem' }}>{emailFreq}<span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--ink-faint)' }}>/5</span></span>
+            </div>
+            <input type="range" min={1} max={5} value={emailFreq} onChange={e => setEmailFreq(Number(e.target.value))} style={{ width: '100%' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--ink-faint)', marginTop: '0.25rem' }}>
+              <span>1 — once at noon</span><span>5 — every few hours</span>
+            </div>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--ink-faint)', marginTop: '0.5rem', marginBottom: 0 }}>
+              {emailFreq === 1 && 'Sends at ~2pm UTC'}
+              {emailFreq === 2 && 'Sends at ~8am, 8pm UTC'}
+              {emailFreq === 3 && 'Sends at ~8am, 2pm, 8pm UTC'}
+              {emailFreq === 4 && 'Sends at ~5am, 8am, 5pm, 8pm UTC'}
+              {emailFreq === 5 && 'Sends at ~5am, 8am, 2pm, 5pm, 8pm UTC'}
+            </p>
+          </div>
+        </section>
+
+        {/* BYOK — Scrapers */}
+        <section style={{ marginBottom: '2rem' }}>
+          {label('Scraper API Keys (optional)')}
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
+            Scout works without these. Add your own keys to unlock higher rate limits.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
@@ -167,6 +194,31 @@ export default function PreferencesPage() {
               { field: 'reddit_client_secret', label: 'Reddit Client Secret', hint: '' },
               { field: 'google_cse_key', label: 'Google CSE API Key', hint: 'console.cloud.google.com' },
               { field: 'google_cse_id', label: 'Google CSE ID', hint: 'cse.google.com' },
+            ].map(({ field, label: lbl, hint }) => (
+              <div key={field}>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--ink-faint)', margin: '0 0 4px' }}>
+                  {lbl}{hint && ` — ${hint}`}
+                </p>
+                <input type="password" placeholder="••••••••"
+                  onChange={e => setApiKeys(prev => ({ ...prev, [field]: e.target.value }))}
+                  className="sketch-input" />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* BYOK — AI Keys */}
+        <section style={{ marginBottom: '2.5rem' }}>
+          {label('AI Keys (optional — for smarter matching)')}
+          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginBottom: '0.75rem', marginTop: 0 }}>
+            Used for AI-powered fake detection and quality filtering. Free tiers work great.
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            {[
+              { field: 'gemini_api_key', label: 'Google Gemini API Key', hint: 'aistudio.google.com — free tier' },
+              { field: 'together_api_key', label: 'Together.ai API Key', hint: 'together.ai — open source models, free credits' },
+              { field: 'openai_api_key', label: 'OpenAI API Key', hint: 'platform.openai.com' },
+              { field: 'anthropic_api_key', label: 'Anthropic API Key', hint: 'console.anthropic.com' },
             ].map(({ field, label: lbl, hint }) => (
               <div key={field}>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--ink-faint)', margin: '0 0 4px' }}>

@@ -8,6 +8,27 @@ import type { Opportunity, Preferences } from '@/lib/types'
 export const runtime = 'nodejs'
 export const maxDuration = 60
 
+// 5 notification slots across the day (UTC hours → slot number 1–5)
+// Slots: 5h=1, 8h=2, 14h=3, 17h=4, 20h=5
+// This route runs at slots 1 (5h) and 4 (17h) — scout cron covers 2,3,5
+function currentSlot(): number {
+  const h = new Date().getUTCHours()
+  if (h < 6) return 1
+  if (h < 11) return 2
+  if (h < 15) return 3
+  if (h < 18) return 4
+  return 5
+}
+
+// Which slots are active for a given email_frequency
+const FREQ_SLOTS: Record<number, number[]> = {
+  1: [3],             // once at 14h
+  2: [2, 5],          // 8h and 20h
+  3: [2, 3, 5],       // 8h, 14h, 20h
+  4: [1, 2, 4, 5],    // 5h, 8h, 17h, 20h
+  5: [1, 2, 3, 4, 5], // all 5 slots
+}
+
 export async function POST(req: Request) {
   const auth = req.headers.get('authorization')
   if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -15,6 +36,8 @@ export async function POST(req: Request) {
   }
 
   try {
+    const slot = currentSlot()
+
     const since = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
     const { data: opps } = await supabaseAdmin
       .from('opportunities')
@@ -39,6 +62,11 @@ export async function POST(req: Request) {
     for (const user of users) {
       const prefs = (user.preferences as unknown as Preferences[])?.[0]
       if (!prefs) continue
+
+      // Check if this user wants notifications at this slot
+      const freq = prefs.email_frequency ?? 1
+      const activeSlots = FREQ_SLOTS[freq] ?? FREQ_SLOTS[1]
+      if (!activeSlots.includes(slot)) continue
 
       for (const opp of opps as Opportunity[]) {
         const result = score(opp, prefs)
@@ -80,7 +108,7 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({ ok: true, notified })
+    return NextResponse.json({ ok: true, slot, notified })
   } catch (err) {
     console.error('[cron/notify]', err)
     return NextResponse.json({ error: String(err) }, { status: 500 })
