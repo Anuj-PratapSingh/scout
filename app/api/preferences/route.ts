@@ -44,6 +44,12 @@ export async function PUT(req: Request) {
   const body = await req.json()
   const { categories, custom_criteria, compulsory_criteria, match_threshold, keys } = body
 
+  // Ensure user row exists (magic link flow doesn't call POST /api/users)
+  await supabaseAdmin.from('users').upsert(
+    { id: user.id, email: user.email },
+    { onConflict: 'id' }
+  )
+
   // Upsert preferences
   if (categories !== undefined || custom_criteria !== undefined) {
     await supabaseAdmin.from('preferences').upsert({
