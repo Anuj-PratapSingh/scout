@@ -64,7 +64,7 @@ export default function SignupPage() {
         </form>
 
         <p style={{ fontFamily: 'var(--font-body)', color: 'var(--ink-faint)', fontSize: '0.85rem', marginTop: '1.5rem', textAlign: 'center' }}>
-          Prefer Telegram? Find <strong>@ScoutOpBot</strong> and send /start
+          Prefer Telegram? Find <strong>@scout_theautomation_bot</strong> and send /start
         </p>
       </div>
     </main>

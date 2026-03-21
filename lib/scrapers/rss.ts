@@ -17,8 +17,8 @@ const RSS_FEEDS = [
   { url: 'https://dev.to/feed/tag/career', source: 'devto' },
   { url: 'https://dev.to/feed/tag/showdev', source: 'devto' },
   // GitHub blog (bounties, programs, grants)
-  { url: 'https://github.blog/feed/', source: 'github' },
-  // Hacker News jobs (separate from stories)
+  { url: 'https://github.blog/feed/', source: 'github-blog' },
+  // Hacker News top stories (articles/discussions, not job board)
   { url: 'https://news.ycombinator.com/rss', source: 'hackernews' },
   // IndieHackers
   { url: 'https://www.indiehackers.com/feed.xml', source: 'indiehackers' },
@@ -43,6 +43,24 @@ async function fetchFeed(url: string): Promise<string | null> {
   }
 }
 
+// Source-specific default tags so the getKind fallback works for mixed sources
+const SOURCE_DEFAULT_TAGS: Record<string, string[]> = {
+  'hn-jobs': ['job', 'startup'],
+  weworkremotely: ['job', 'remote'],
+  remotive: ['job', 'remote'],
+  internshala: ['internship', 'india'],
+  wellfound: ['job', 'startup'],
+  devpost: ['hackathon', 'contest'],
+  mlh: ['hackathon'],
+  devfolio: ['hackathon'],
+  unstop: ['hackathon', 'contest'],
+  ctftime: ['contest', 'security'],
+  hackerearth: ['hackathon', 'coding'],
+  kaggle: ['competition', 'ml'],
+  ethglobal: ['hackathon', 'web3'],
+  swag: ['swag', 'free'],
+}
+
 function parseEntries(xml: string, source: string): Opportunity[] {
   try {
     const parsed = parser.parse(xml)
@@ -50,13 +68,24 @@ function parseEntries(xml: string, source: string): Opportunity[] {
     const items = channel?.item ?? channel?.entry ?? []
     const arr = Array.isArray(items) ? items : [items]
 
-    return arr.map((item: Record<string, string>) => ({
-      title: item.title ?? '',
-      description: (item.description ?? item.summary ?? item.content ?? '').slice(0, 500),
-      url: item.link ?? item.url ?? item.id ?? '',
-      source,
-      tags: [],
-    })).filter((o: Opportunity) => o.url && o.title)
+    const defaultTags = SOURCE_DEFAULT_TAGS[source] ?? []
+
+    return arr.map((item: Record<string, string>) => {
+      const description = (item.description ?? item.summary ?? item.content ?? '').slice(0, 500)
+      return {
+        title: item.title ?? '',
+        description,
+        url: item.link ?? item.url ?? item.id ?? '',
+        source,
+        tags: defaultTags,
+      }
+    }).filter((o: Opportunity) => {
+      if (!o.url || !o.title) return false
+      // Quality gate for blog sources: require meaningful description
+      const blogSources = ['devto', 'indiehackers', 'hackernews', 'github-blog', 'google-developers', 'aws-opensource']
+      if (blogSources.includes(source) && o.description.length < 30) return false
+      return true
+    })
   } catch {
     return []
   }

@@ -60,15 +60,24 @@ export async function scrapeMLH(): Promise<Opportunity[]> {
   }
 }
 
-// GitHub search — trending CS repos useful for students
+// GitHub search — quality CS repos useful for students
+// Quality criteria: ≥50 stars, has description, not archived, CS/algo/interview topics
 export async function scrapeGitHub(): Promise<Opportunity[]> {
-  const queries = ['topic:computer-science', 'topic:algorithms', 'topic:interview-prep', 'topic:awesome']
+  const queries = [
+    'topic:computer-science stars:>100',
+    'topic:algorithms stars:>100',
+    'topic:interview-prep stars:>50',
+    'topic:awesome topic:programming stars:>500',
+    'topic:data-structures stars:>100',
+    'topic:competitive-programming stars:>50',
+  ]
   const results: Opportunity[] = []
+  const seen = new Set<string>()
 
   for (const q of queries) {
     try {
       const res = await fetch(
-        `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=updated&per_page=10`,
+        `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=10`,
         {
           headers: { 'User-Agent': 'Scout/1.0', Accept: 'application/vnd.github+json' },
           signal: AbortSignal.timeout(8000),
@@ -76,14 +85,28 @@ export async function scrapeGitHub(): Promise<Opportunity[]> {
       )
       if (!res.ok) continue
       const data = await res.json()
-      const items: Array<{ full_name: string; description: string; html_url: string; topics: string[] }> = data.items ?? []
-      results.push(...items.map(repo => ({
-        title: repo.full_name,
-        description: repo.description?.slice(0, 500) ?? '',
-        url: repo.html_url,
-        source: 'github',
-        tags: repo.topics ?? [],
-      })))
+      const items: Array<{
+        full_name: string; description: string | null; html_url: string
+        topics: string[]; stargazers_count: number; archived: boolean; fork: boolean
+      }> = data.items ?? []
+
+      for (const repo of items) {
+        // Quality gates: must have description, ≥50 stars, not archived, not a fork
+        if (!repo.description || repo.description.trim().length < 20) continue
+        if (repo.stargazers_count < 50) continue
+        if (repo.archived) continue
+        if (repo.fork) continue
+        if (seen.has(repo.html_url)) continue
+        seen.add(repo.html_url)
+
+        results.push({
+          title: repo.full_name,
+          description: `⭐ ${repo.stargazers_count.toLocaleString()} stars — ${repo.description.slice(0, 400)}`,
+          url: repo.html_url,
+          source: 'github',
+          tags: repo.topics ?? [],
+        })
+      }
     } catch {
       // continue
     }

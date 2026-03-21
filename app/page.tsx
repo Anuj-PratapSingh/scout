@@ -13,6 +13,7 @@ type Kind = 'events' | 'jobs' | 'blogs' | 'repos' | 'swag'
 const SOURCE_LABEL: Record<string, string> = {
   hackernews: 'HN', reddit: 'Reddit', devpost: 'Devpost', devto: 'Dev.to',
   remotive: 'Remotive', weworkremotely: 'WWR', github: 'GitHub',
+  'github-blog': 'GitHub Blog',
   ctftime: 'CTFtime', mlh: 'MLH', devfolio: 'Devfolio', unstop: 'Unstop',
   indiehackers: 'IndieHackers', linkedin: 'LinkedIn',
   'google-developers': 'Google Dev', 'aws-opensource': 'AWS OSS',
@@ -21,32 +22,35 @@ const SOURCE_LABEL: Record<string, string> = {
   ethglobal: 'ETHGlobal',
 }
 
-// Source-authoritative categorization — no keyword guessing for known sources
+// Source-authoritative categorization — strict, no guessing
 const SOURCE_KIND: Record<string, Kind> = {
-  // Events & competitions
+  // Events & competitions only — sources that EXCLUSIVELY publish events/hackathons
   devpost: 'events', mlh: 'events', devfolio: 'events', unstop: 'events',
   ctftime: 'events', hackerearth: 'events', kaggle: 'events', ethglobal: 'events',
-  // Jobs & internships
+  // Jobs & internships only — sources that EXCLUSIVELY publish job listings
   remotive: 'jobs', weworkremotely: 'jobs', 'hn-jobs': 'jobs',
   internshala: 'jobs', wellfound: 'jobs',
-  // Blogs & resources
+  // Blogs & resources — article/editorial sources
   devto: 'blogs', indiehackers: 'blogs', 'google-developers': 'blogs',
-  'aws-opensource': 'blogs', 'eu-grants': 'blogs',
-  // Repos & cool projects (GitHub search = code repos, not events)
+  'aws-opensource': 'blogs', 'eu-grants': 'blogs', 'github-blog': 'blogs',
+  // HN RSS = article discussions, not a job board or event calendar → blogs
+  hackernews: 'blogs',
+  // CS repos — GitHub search results (quality-gated at scrape time: ≥50 stars, has description)
   github: 'repos',
-  // Swag
+  // Swag & bounties
   swag: 'swag',
 }
 
 function getKind(opp: Opp): Kind {
-  // Trust the source first
+  // Trust the source mapping — all major sources are explicitly mapped
   if (SOURCE_KIND[opp.source]) return SOURCE_KIND[opp.source]
-  // For reddit/hackernews/linkedin — infer from tags (set during scraping, more reliable than title matching)
+  // For unknown/mixed sources (reddit, linkedin) — infer from tags set at scrape time
   const tags = (opp.tags ?? []).join(' ').toLowerCase()
-  if (['swag', 'free stuff', 'giveaway', 'sticker'].some(k => tags.includes(k))) return 'swag'
+  if (['swag', 'free', 'giveaway', 'student-pack'].some(k => tags.includes(k))) return 'swag'
   if (['job', 'hiring', 'internship', 'salary', 'remote'].some(k => tags.includes(k))) return 'jobs'
-  if (['hackathon', 'contest', 'bounty', 'grant', 'fellowship', 'competition'].some(k => tags.includes(k))) return 'events'
-  return 'events' // default for mixed sources
+  if (['hackathon', 'contest', 'competition', 'bounty', 'grant', 'fellowship'].some(k => tags.includes(k))) return 'events'
+  // Unknown sources default to blogs (safer than polluting events/jobs)
+  return 'blogs'
 }
 
 // ─── Radar background ─────────────────────────────────────────────────────────
@@ -80,7 +84,7 @@ const TUTORIAL = [
   { icon: '📡', title: 'Scout monitors 20+ sources', body: 'HackerNews, Reddit, Devpost, MLH, GitHub, CTFtime, Devfolio, Unstop, Remotive and more — scraped 3× daily.' },
   { icon: '🎯', title: 'You set your criteria', body: 'Pick categories (hackathons, jobs, bounties…), add custom keywords, set a match threshold, and flag compulsory criteria.' },
   { icon: '📬', title: 'Get a digest or instant alert', body: 'Good matches → one digest email. Perfect matches (hits ALL your criteria) → standalone alert sent immediately.' },
-  { icon: '✈️', title: 'Works on Telegram & Discord too', body: 'Set up via @ScoutOpBot on Telegram or the Scout bot on Discord. After setup, Scout sends matching opps right away.' },
+  { icon: '✈️', title: 'Works on Telegram & Discord too', body: 'Set up via @scout_theautomation_bot on Telegram or the Scout bot on Discord. After setup, Scout sends matching opps right away.' },
 ]
 
 // ─── Tutorial modal ───────────────────────────────────────────────────────────
