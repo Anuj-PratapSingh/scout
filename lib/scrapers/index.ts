@@ -62,10 +62,13 @@ export async function runAllScrapers(opts: ScrapeOptions = {}): Promise<number> 
 
   if (clean.length === 0) return 0
 
-  // Normalize URLs before upsert to improve deduplication
-  const normalized = clean.map(o => ({ ...o, url: normalizeUrl(o.url) }))
+  // Normalize URLs, then deduplicate within the batch (same URL from two scrapers = keep first)
+  const seen = new Set<string>()
+  const normalized = clean
+    .map(o => ({ ...o, url: normalizeUrl(o.url) }))
+    .filter(o => { if (seen.has(o.url)) return false; seen.add(o.url); return true })
 
-  // Upsert — url is unique; on conflict update tags/description so category tags stay fresh
+  // Upsert — url is unique; on conflict update so category tags stay fresh
   const { error } = await supabaseAdmin
     .from('opportunities')
     .upsert(normalized, { onConflict: 'url' })
